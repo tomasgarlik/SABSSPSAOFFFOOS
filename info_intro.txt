@@ -1,0 +1,8 @@
+Vítejte u instalátoru.
+
+Předtím, než budeme pokračovat, se prosím ujistěte, že:
+- Používáte operační systém Windows  (někde na obrazovce máte piktogram naklopeného/rovného okna)
+- Máte funkční obrazovku (program nepodporuje hlasové ovládání)
+- Pokud nejste na notebooku, ujistěte se, že máte připojenou klávesnici a myš
+
+Kliknutím na jedno z tlačítek dole možná spustíte instalaci.

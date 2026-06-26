@@ -1,0 +1,168 @@
+LICENČNÍ UJEDNÁNÍ S KONCOVÝM UŽIVATELEM (EULA)
+Program: SABSSPSAOFFFOOS
+Autor: Tomáš Garlík
+Verze ujednání: 1.0
+
+PŘED INSTALACÍ A POUŽÍVÁNÍM TOHOTO PROGRAMU SI POZORNĚ PŘEČTĚTE
+NÁSLEDUJÍCÍ LICENČNÍ UJEDNÁNÍ. INSTALACÍ, KOPÍROVÁNÍM NEBO JINÝM
+POUŽÍVÁNÍM TOHOTO PROGRAMU VYJADŘUJETE SVŮJ SOUHLAS S NÍŽE UVEDENÝMI
+PODMÍNKAMI. POKUD S TĚMITO PODMÍNKAMI NESOUHLASÍTE, NEINSTALUJTE,
+NEKOPIRUJTE ANI JINAK NEPOUŽÍVEJTE TENTO PROGRAM.
+
+1. DEFINICE
+
+1.1 „Programem" se rozumí softwarové dílo nazvané SABSSPSAOFFFOOS,
+včetně jeho zdrojového kódu, spustitelných souborů, dokumentace,
+instalačních souborů a veškerých souvisejících materiálů.
+
+1.2 „Autorem" se rozumí Tomáš Garlík, fyzická osoba, která Program
+vytvořila a je nositelem autorských práv k Programu v rozsahu, v jakém
+tato práva nejsou omezena právy třetích stran k součástem, na kterých
+Program staví (viz článek 7).
+
+1.3 „Uživatelem" se rozumí jakákoliv fyzická nebo právnická osoba, která
+Program instaluje, kopíruje, šíří nebo jiným způsobem používá.
+
+1.4 „Nekomerčním použitím" se rozumí použití Programu, ze kterého
+Uživateli ani třetí straně neplyne přímý ani nepřímý finanční nebo jiný
+majetkový prospěch z prodeje, pronájmu, zpřístupnění za úplatu nebo
+jiného komerčního zhodnocení Programu samotného či jeho odvozenin.
+
+2. UDĚLENÍ LICENCE
+
+2.1 Autor tímto uděluje Uživateli celosvětovou, bezúplatnou,
+nevýhradní licenci k instalaci a používání Programu, a to výhradně pro
+nekomerční účely.
+
+2.2 Uživatel je oprávněn Program dále bezplatně šířit, kopírovat a
+sdílet s třetími osobami, a to i bez předchozího souhlasu Autora, pokud
+je takové šíření prováděno bezúplatně a Program je šířen jako celek,
+včetně tohoto licenčního ujednání.
+
+2.3 Program je zveřejněn jako open source na veřejně dostupném
+repozitáři GitHub. Uživatel je oprávněn zdrojový kód Programu prohlížet,
+studovat, upravovat pro vlastní nekomerční potřebu a vytvářet odvozená
+díla, pokud tím neporuší podmínky uvedené v tomto ujednání ani podmínky
+licencí třetích stran uvedených v článku 7.
+
+2.4 Jakékoliv komerční využití Programu, jeho částí, odvozených děl nebo
+zdrojového kódu je bez předchozího písemného souhlasu Autora výslovně
+zakázáno.
+
+3. DUŠEVNÍ VLASTNICTVÍ
+
+3.1 Program je chráněn autorským právem a dalšími právy duševního
+vlastnictví. Veškerá práva, která nejsou tímto ujednáním výslovně
+udělena, si Autor vyhrazuje.
+
+3.2 Touto licencí nedochází k převodu žádných vlastnických práv k
+Programu na Uživatele. Uživatel získává pouze právo Program užívat v
+rozsahu stanoveném tímto ujednáním.
+
+4. INSTALACE A FUNKČNOST
+
+4.1 Program může v rámci své činnosti vytvářet, upravovat nebo ukládat
+soubory, data či jiný obsah na zařízení Uživatele (dále jen „generovaný
+obsah"). Autor nenese žádnou odpovědnost za generovaný obsah, jeho
+povahu, obsahový soulad s očekáváním Uživatele ani za jakékoliv
+důsledky, které z existence, použití, uložení nebo šíření takového
+generovaného obsahu Uživateli nebo třetím stranám vzniknou.
+
+4.2 Uživatel bere na vědomí, že Program byl vytvořen jako indie projekt a jako takový nemusí splňovat nároky na bezchybnost, stabilitu
+nebo bezpečnost srovnatelné s komerčním softwarem.
+
+4.3 Autor nezaručuje, že Program bude funkční na všech zařízeních,
+operačních systémech nebo konfiguracích, ani že bude kompatibilní s
+budoucími verzemi operačních systémů nebo ovladačů.
+
+5. OCHRANA OSOBNÍCH ÚDAJŮ A ZPRACOVÁNÍ DAT
+
+5.1 Program slouží k vytváření zasedacích pořádků a za tímto účelem
+může Uživatel do Programu zadávat osobní údaje žáků nebo jiných osob
+(zejména jména, příjmení, případně třídu nebo jiné organizační údaje).
+
+5.2 Program zpracovává veškerá zadaná data výhradně lokálně na
+zařízení Uživatele. Program neobsahuje žádnou funkcionalitu pro
+odesílání, sdílení, synchronizaci nebo jiné zpřístupňování zadaných
+dat na vzdálené servery, třetím stranám ani Autorovi. Zadané osobní
+údaje tak neopouští zařízení, na kterém je Program používán.
+
+5.3 Veškerá data zadaná do Programu jsou uložena pouze v rámci
+souborů Programu na zařízení Uživatele. Za jejich zabezpečení, zálohu a
+soulad se zákonnými povinnostmi při zpracování osobních údajů (např.
+GDPR) odpovídá Uživatel, případně instituce, v rámci které je
+Program používán.
+
+6. VYLOUČENÍ ZÁRUK
+
+6.1 PROGRAM JE POSKYTOVÁN „TAK, JAK JE" (AS IS), BEZ JAKÝCHKOLIV ZÁRUK,
+VÝSLOVNÝCH NEBO IMPLICITNÍCH, VČETNĖ, ALE NIKOLIV VÝLUČNĖ, ZÁRUK
+PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL A NEPORUŠENÍ PRÁV TŘETÍCH STRAN.
+
+6.2 Autor nezaručuje, že Program bude fungovat nepřerušeně, bezchybně
+nebo že případné chyby budou opraveny.
+
+7. SOFTWARE TŘETÍCH STRAN
+
+7.1 Program využívá knihovnu SDL2 (Simple DirectMedia Layer),
+distribuovanou pod licencí zlib. Text této licence je dostupný na adrese
+https://www.libsdl.org/license.php a je nedílnou součástí licenčních
+podmínek vztahujících se na příslušnou součást Programu. Použitím
+Programu Uživatel souhlasí i s podmínkami uvedenými v licenci knihovny
+SDL2.
+
+7.2 Program dále využívá knihovnu nlohmann/json, distribuovanou pod
+licencí MIT. Text této licence je dostupný na adrese
+https://github.com/nlohmann/json/blob/develop/LICENSE.MIT a je
+nedílnou součástí licenčních podmínek vztahujících se na příslušnou
+součást Programu.
+
+7.3 Program dále využívá knihovnu pdfgen, kterou její autoři zveřejnili
+jako volné dílo (public domain) s doložkou „Public domain license - no
+warranty implied; use at your own risk." Tato knihovna je tedy užívána
+bez nároku třetí strany na autorská práva, a to bez jakékoliv záruky.
+
+7.4 Autorská práva ke knihovnám uvedeným v tomto článku a jejich
+součástem náleží jejich příslušným vlastníkům a nejsou tímto
+ujednáním nijak dotčena.
+
+8. OMEZENÍ ODPOVĖDNOSTI
+
+8.1 Autor v maximálním rozsahu povoleném příslušnými právními předpisy
+neodpovídá za jakoukoliv přímou, nepřímou, náhodnou, zvláštní,
+následnou nebo jinou škodu (včetně, ale nikoliv výlučně, ztráty dat,
+ztráty zisku, přerušení provozu nebo poškození zařízení), která vznikne
+v souvislosti s instalací, používáním nebo nemožností používat Program,
+a to i v případě, že byl na možnost vzniku takové škody upozorněn.
+
+8.2 Uživatel používá Program na vlastní riziko a nese plnou odpovědnost
+za výsledky jeho použití.
+
+9. DOBA TRVÁNÍ A UKONČENÍ
+
+9.1 Toto ujednání je platné po celou dobu, po kterou Uživatel Program
+používá. Autor je oprávněn licenci ukončit v případě, že Uživatel
+poruší podmínky tohoto ujednání.
+
+9.2 Po ukončení licence je Uživatel povinen veškeré kopie Programu, ke
+kterým má přístup, odinstalovat nebo trvale odstranit.
+
+10. ZÁVĖREČNÁ USTANOVENÍ
+
+10.1 Toto ujednání se řídí právním řádem České republiky.
+
+10.2 Pokud by se některé ustanovení tohoto ujednání ukázalo jako
+neplatné nebo nevymahatelné, nemá tato skutečnost vliv na platnost a
+vymahatelnost ostatních ustanovení.
+
+10.3 Autor si vyhrazuje právo toto ujednání kdykoliv změnit pro budoucí
+verze Programu. Změny se nevztahují na již nainstalované a používané
+verze, pokud není uvedeno jinak.
+
+10.4 Otázky a připomínky k tomuto ujednání lze směřovat na Autora
+prostřednictvím repozitáře Programu na GitHubu nebo e-mailu tomas.garlik@krestgym.cz.
+
+Instalací a používáním Programu Uživatel potvrzuje, že si toto ujednání
+přečetl, rozumí mu a souhlasí s jeho podmínkami.
+
+© Tomáš Garlík. Všechna práva vyhrazena v rozsahu neudělené licencí.
