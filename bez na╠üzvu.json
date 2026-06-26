@@ -1,0 +1,39 @@
+{
+    "comment": "",
+    "faktor_socialni_rovnosti": 0.0,
+    "filename": "/Users/tomasgarlik/Documents/generator/bez názvu.json",
+    "guesswork_itterations": 5000000,
+    "header": "Zasedací pořádek 1.A",
+    "penalizace_za_nespokojenost": 2.0,
+    "seats": [],
+    "students": [
+        {
+            "gender": 0,
+            "height": 180,
+            "in_front": 0.20000000298023224,
+            "musnt": [],
+            "name": "Jan Novák",
+            "prefered": [],
+            "sit_with_different_gender": true,
+            "weights": {
+                "height": 0.0,
+                "in_front": 0.0,
+                "musnt": 0.0,
+                "prefered": 0.0,
+                "sit_with_another_gender": 0.0,
+                "yap_groups": 0.0
+            }
+        }
+    ],
+    "subheader": "Radim Vysoký",
+    "weights": {
+        "close": 0.07999999821186066,
+        "height": 0.3499999940395355,
+        "in_front": 0.17000000178813934,
+        "musnt": 0.0,
+        "prefered": 0.4000000059604645,
+        "sit_with_another_gender": 0.0,
+        "yap_groups": 0.0
+    },
+    "yapp_groups": []
+}

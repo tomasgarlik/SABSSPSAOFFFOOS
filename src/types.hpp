@@ -1,0 +1,171 @@
+typedef void (*funcPtr)(void);
+typedef struct
+{
+    SDL_Texture* textures[20];
+    SDL_Texture* title;
+    int lenght;
+    int xpos;
+    int ypos;
+    int width;
+    bool opened;
+    int topwidth;
+    int selected;
+    std::string titletype;
+    std::function<void()> functions[20];
+
+}dropmenu;
+typedef struct
+{
+    int xpos;
+    int ypos;
+    std::string text;
+    Uint32 last_time_cursor_blink;
+    bool cursor_visible;
+    int start_of_selected;
+    int end_of_selected;
+    bool active;
+    int cursorpos;
+    int textsize;
+    int textwidth;
+    bool origin_left;
+}textbox;
+typedef struct
+{
+    int xpos;
+    int ypos;
+    std::string text;
+    int textsize;
+    int textwidth;
+    bool origin_left;
+}label;
+typedef struct
+{
+    int xpos;
+    int ypos;
+    std::string text;
+    Uint32 last_time_cursor_blink;
+    bool cursor_visible;
+    int start_of_selected;
+    int end_of_selected;
+    bool active;
+    int cursorpos;
+    int number;
+    int size;
+    int maxnum;
+}numberinputbox;
+typedef struct{
+    SDL_Texture* texture;
+    int xpos;
+    int ypos;
+    // funcPtr function;
+    bool force_selected;
+
+    std::function<void()> function;
+} button;
+typedef struct
+{
+    SDL_Texture* title;
+    int xpos;
+    int ypos;
+    bool checked;
+    bool just_changed;
+} checkbox;
+typedef struct {
+    float min;
+    float max;
+    bool moving;
+    float value;
+    int xpos;
+    int ypos;
+    int width;
+} slider;
+typedef struct{
+    int type;
+    dropmenu dropmenu;
+    numberinputbox numberinputbox;
+    textbox textbox;
+    button button;
+    label label;
+    checkbox checkbox;
+    slider slider;
+} element;
+typedef struct{
+    int x;
+    int y;
+    int w;
+    int h;
+    std::vector<element> scrollable_elements;
+    std::vector<element> top_elements;
+    std::vector<element> bottom_elements;
+    int scrolled=0;
+} panel;
+typedef struct{
+    float height;
+    float in_front;
+    float prefered;
+    float close;
+    float musnt;
+    float sit_with_another_gender;
+    float yap_groups;
+    float close_dist;
+} weights;
+typedef struct{
+    std::string name;
+    int height;
+    float in_front;
+    float old_in_front;
+    std::vector<int> prefered;
+    std::vector<int> musnt;
+    int gender;
+    bool sit_with_different_gender;
+    weights weights;
+    bool empty;
+    //will generate
+    std::vector<int> can;
+} student;
+typedef struct{
+    int xpos;
+    int ypos;
+    int student;
+} seat;
+typedef struct{
+    int seat1;
+    int seat2;
+    int dvojice;
+} lavice;
+typedef struct{
+    int s1;
+    int s2;
+    float score;
+} dvojce;
+typedef struct{
+    std::vector<student> students;
+    std::vector<seat> seats;
+    std::vector<std::vector<int>> yapp_groups;
+    std::string header;
+    std::string subheader;
+    std::string comment;
+    std::string filename;
+    int guesswork_itterations;
+    weights weights;
+    // to be generated
+    int front_ypos;
+    int back_ypos;
+    std::vector<lavice> lavice;
+    std::vector<dvojce> dvojice;
+    float score;
+    int shortest;
+    int tallest;
+    int avgx;
+    //settings
+    float faktor_socialni_rovnosti;
+    float penalizace_za_nespokojenost;
+} projectType;
+typedef struct{
+    int x;
+    int y;
+} intVec2;
+typedef struct{
+    uint64_t comb;
+    float score;
+} peak;

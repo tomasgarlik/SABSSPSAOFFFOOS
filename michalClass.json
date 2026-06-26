@@ -1,0 +1,103 @@
+{
+    "comment": "",
+    "faktor_socialni_rovnosti": 0.0,
+    "filename": "/Users/tomasgarlik/Documents/generator/michalClass.json",
+    "guesswork_itterations": 5000000,
+    "header": "Zasedací pořádek 1.A",
+    "penalizace_za_nespokojenost": 2.0,
+    "seats": [
+        {
+            "student": -1,
+            "xpos": -3,
+            "ypos": -1
+        },
+        {
+            "student": -1,
+            "xpos": -2,
+            "ypos": -1
+        },
+        {
+            "student": -1,
+            "xpos": 0,
+            "ypos": -1
+        },
+        {
+            "student": -1,
+            "xpos": 1,
+            "ypos": -1
+        }
+    ],
+    "students": [
+        {
+            "gender": 0,
+            "height": 195,
+            "in_front": 0.15238095819950104,
+            "musnt": [],
+            "name": "Michal Garlik",
+            "prefered": [],
+            "sit_with_different_gender": true,
+            "weights": {
+                "height": 0.0,
+                "in_front": 0.0,
+                "musnt": 0.0,
+                "prefered": 0.0,
+                "sit_with_another_gender": 0.0
+            }
+        },
+        {
+            "gender": 0,
+            "height": 180,
+            "in_front": 0.5841584205627441,
+            "musnt": [],
+            "name": "Jan Novák",
+            "prefered": [],
+            "sit_with_different_gender": true,
+            "weights": {
+                "height": 0.0,
+                "in_front": 0.0,
+                "musnt": 0.0,
+                "prefered": 0.0,
+                "sit_with_another_gender": 0.0
+            }
+        },
+        {
+            "gender": 1,
+            "height": 160,
+            "in_front": 0.20000000298023224,
+            "musnt": [
+                1
+            ],
+            "name": "Johana Bokova",
+            "prefered": [
+                1,
+                0
+            ],
+            "sit_with_different_gender": true,
+            "weights": {
+                "height": 0.0,
+                "in_front": 0.0,
+                "musnt": 0.0,
+                "prefered": 0.0,
+                "sit_with_another_gender": 0.0
+            }
+        },
+        {
+            "gender": 0,
+            "height": 180,
+            "in_front": 0.20000000298023224,
+            "musnt": [],
+            "name": "Jan Nonvák",
+            "prefered": [],
+            "sit_with_different_gender": true,
+            "weights": {
+                "height": 0.0,
+                "in_front": 0.0,
+                "musnt": 0.0,
+                "prefered": 0.0,
+                "sit_with_another_gender": 0.0
+            }
+        }
+    ],
+    "subheader": "Radim Vysoký",
+    "yapp_groups": []
+}
