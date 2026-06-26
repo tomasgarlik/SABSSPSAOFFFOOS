@@ -68,7 +68,7 @@ while (running) {
 }
 SDL_DestroyTexture(texture);
 SDL_DestroyRenderer(rendere);
-// SDL_DestroyWindow(splashscreen);
+SDL_DestroyWindow(splashscreen);
 #ifdef RETINA_DISPLAY
 Uint32 window_flags = SDL_WINDOW_SHOWN | 
                     SDL_WINDOW_RESIZABLE | 
