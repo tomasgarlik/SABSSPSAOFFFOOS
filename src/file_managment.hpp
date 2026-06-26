@@ -32,13 +32,13 @@ void savefunc() {
 }
 
 void saveasfunc() {
-    const char* filtry[] = { "*.json" };
+    const char* filtry[] = { "*.zsv" };
     const char* cesta = tinyfd_saveFileDialog(
         "Ulozit projekt jako...",
-        "bez názvu.json",
+        "bez názvu.zsp",
         1,
         filtry,
-        "JSON soubory (*.json)"
+        "zsp soubory (*.zsp)"
     );
 
     // Uživatel dal Storno
@@ -46,9 +46,9 @@ void saveasfunc() {
 
     std::string filename = cesta;
 
-    // pokud to nekončí na .json, přidej to
-    if (filename.size() < 5 || filename.substr(filename.size() - 5) != ".json") {
-        filename += ".json";
+    // pokud to nekončí na .zsp, přidej to
+    if (filename.size() < 5 || filename.substr(filename.size() - 5) != ".zsp") {
+        filename += ".zsp";
     }
 
     project.filename = filename;
@@ -56,13 +56,13 @@ void saveasfunc() {
 }
 
 void openfunc() {
-    const char* filtry[] = { "json" };
+    const char* filtry[] = { "zsp" };
     const char* cesta = tinyfd_openFileDialog(
         "Otevrit projekt",
         "",
         0,
         NULL,
-        "JSON soubory (*.json)",
+        "zsp soubory (*.zsp)",
         0
     );
 
