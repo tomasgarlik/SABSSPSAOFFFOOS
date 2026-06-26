@@ -1,6 +1,0 @@
-ID;Jméno;Výška;Pohlaví;může sedět s zakem jiného pohlaví;chce sedět s;nesmí sedět s;potřeba sedět ve předu
-0;radim;123;Muž;ano;1;;ne
-1;pepa ;432;Muž;ano;3,0;;0.1
-2;igor;142;Muž;ano;4;;0.2
-3;kvetoslav;543;Muž;ano;2;;0.5
-4;aneta;143;Žena;ano;;;0.2
