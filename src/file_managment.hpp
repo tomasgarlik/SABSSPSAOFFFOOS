@@ -32,7 +32,7 @@ void savefunc() {
 }
 
 void saveasfunc() {
-    const char* filtry[] = { "*.zsv" };
+    const char* filtry[] = { "*.zsp" };
     const char* cesta = tinyfd_saveFileDialog(
         "Ulozit projekt jako...",
         "bez názvu.zsp",
