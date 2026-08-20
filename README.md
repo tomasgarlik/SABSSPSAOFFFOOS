@@ -11,6 +11,7 @@ Program pro učitele, který automaticky navrhuje zasedací pořádek žáků na
 - [Nastavení váhy faktorů](#nastavení-váhy-faktorů)
 - [Automatické generování zasedacího pořádku](#automatické-generování-zasedacího-pořádku)
 - [Export do PDF a správa souborů](#export-do-pdf-a-správa-souborů)
+- [Hlášení problémů či námětů pro vylepšení](#Hlášení-problémů-či-námětů-pro-vylepšení)
 - [Licence](#licence)
 
 ---
@@ -111,7 +112,17 @@ V nabídce **„Soubor"** naleznete standardní funkce pro správu projektu:
 - **Exportovat do PDF...** — Vygeneruje čistý tiskový dokument. Před samotným exportem zadáte **Nadpis** (např. *Třída 8.A*) a **Podnadpis** (např. *Školní rok 2026/2027*, nebo jméno třídního učitele), které se zobrazí v záhlaví výsledného PDF plánku.
 
 ---
+## Hlášení problémů či námětů pro vylepšení
+Všechny problémy a náměty na vylepšení prosím hlaste přes sekci **Issues** na GitHubu:
 
+1. Přejděte do repozitáře projektu na GitHubu.
+2. V horní nabídce klikněte na záložku **Issues**.
+3. Klikněte na zelené tlačítko **New issue**.
+4. Zadejte výstižný název a do popisu detailně uveďte:
+   * Popis chování (co se stalo a co jste očekávali).
+   * Postup, jak chybu vyvolat (kroky k reprodukci).
+   * Případně přiložte chybovou hlášku.
+---
 ## Licence
 
 Program je zdarma pro nekomerční použití. Kompletní licenční ujednání (EULA) včetně licencí použitých knihoven třetích stran (SDL2, nlohmann/json, pdfgen, tinyfiledialogs, maximum-weight-matching) se zobrazí během instalace, nebo jej najdete v souboru `license_agreement.txt`.
