@@ -52,11 +52,10 @@ Po spuštění programu se zobrazí pracovní plocha, na které se vytváří a 
 
 - prázdné místo ↔ prázdné místo
 - prázdné místo ↔ prázdná lavice
-- lavice se žákem ↔ prázdná lavice
 - lavice se žákem ↔ prázdné místo
+- lavice se žákem ↔ prázdná lavice
 - prázdná lavice ↔ prázdná lavice
-- žák ↔ žák
-
+- lavice se žákem ↔ lavice se žákem
 ---
 
 ## Přidávání žáků
