@@ -1,4 +1,4 @@
-Program pro učitele, který automaticky navrhuje zasedací pořádek žáků na základě zadaných kritérií (výška, přání sedět s kamarádem, potřeba sedět vpředu atd.) pomocí optimalizačního algoritmu.
+Program pro učitele, který automaticky navrhuje zasedací pořádek žáků na základě zadaných kritérií pomocí optimalizačního algoritmu.
 
 ---
 
