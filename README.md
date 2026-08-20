@@ -69,12 +69,12 @@ Do nabídky správy žáků se dostanete přes menu **„Seznam žáků"**. Zde 
 | **Jméno** | Křestní jméno a příjmení žáka. |
 | **Výška (cm)** | Číselný údaj o výšce žáka. Vyšší žáci jsou algoritmem směřováni spíše do zadních řad, aby nebránili ve výhledu nižším spolužákům. |
 | **Pohlaví** | Výběr ze seznamu (např. Muž, Žena apod.). Slouží pro pravidla kombinování pohlaví v lavicích. |
-| **Může sedět s žákem jiného pohlaví** | Zaškrtávací pole. Pokud není zaškrtnuto, algoritmus bude žákovi vybírat sousedy pouze stejného pohlaví. |
+| **Může sedět s žákem jiného pohlaví** | Zaškrtávací pole. Pokud není zaškrtnuto, algoritmus bude žákovi vybírat sousedy pouze stejného pohlaví. Toto je **striktní pravidlo**, které algoritmus nesmí za žádných okolností porušit.|
 | **Potřeba sedět vpředu** | Posuvník od 0.0 (nevyžaduje) do 1.0 (maximální priorita). Určeno pro žáky se zrakovým/sluchovým omezením nebo potřebou zvýšeného dohledu. |
 | **Chce sedět s... (preferované)** | Seznam spolužáků seřazený dle priority (1., 2., 3. místo). Pořadí můžete měnit šipkami ▲ a ▼. Jde o preferenci, kterou se algoritmus snaží maximálně naplnit. Žáci neumístění v seznamu jsou považováni za neutrální. |
 | **Nesmí sedět s... (striktní pravidlo)** | Seznam zakázaných sousedů. Toto je **striktní pravidlo**, které algoritmus nesmí za žádných okolností porušit. |
 
-> **Poznámka:** Striktní omezení („Nesmí sedět s") mají absolutní přednost před preferencemi („Chce sedět s"). Pokud nastavíte vzájemně si odporující striktní pravidla, algoritmus nemusí najít platné řešení.
+> **Poznámka:** Striktní omezení mají absolutní přednost před ostatními. Pokud nastavíte vzájemně si odporující striktní pravidla, algoritmus Vás upozorní.
 
 ---
 
@@ -88,7 +88,7 @@ V menu **„Váhy..."** můžete jemně doladit prioritizaci jednotlivých fakto
 | **Potřeba být vpředu** | Určuje důležitost předních řad pro žáky s vysokým požadavkem na sezení vpředu. |
 | **Chce sedět s** | Váha přikládaná splnění přání sedět s konkrétním kamarádem. |
 | **Je blízko u** | Bodovací bonus za sezení v těsné blízkosti (stejná lavice nebo sousední lavice). |
-| **Je blízko u — dosah** | Maximální vzdálenost (okruh), ve které algoritmus ještě považuje sousedy za „blízké". |
+| **Je blízko u dosah** | Maximální vzdálenost (okruh), ve které algoritmus ještě považuje sousedy za „blízké". |
 
 Tlačítko **„Výchozí"** v okně vah vrátí všechny posuvníky na tovární nastavení.
 
@@ -98,8 +98,8 @@ Tlačítko **„Výchozí"** v okně vah vrátí všechny posuvníky na továrn�
 
 Pokud nechcete žáky posazovat na místa ručně tlačítkem **„+"** u každé lavice, kliknutím na tlačítko **„Vygenerovat..."** v horní liště otevřete dialog pro volbu metody generování:
 
-- **Náhoda** — Rozsadí žáky do dostupných lavic zcela náhodně bez ohledu na výšku, preference či omezení. Vhodné pro rychlé losování.
-- **Hledací algoritmus** — Pokročilý optimalizační výpočet. Vyhodnocuje všechna zadaná kritéria, respektuje striktní pravidla a maximalizuje celkovou spokojenost třídy podle nastavených vah. Algoritmus se nesnaží o nejlepší *průměrnou* spokojenost — cílí na to, aby byli spokojeni všichni alespoň nějak, a neupřednostňuje pár extrémně spokojených žáků na úkor jiných.
+- **Náhoda** — Rozsadí žáky do dostupných lavic zcela náhodně bez ohledu na výšku, preference či omezení. Vhodné pro rychlé losování. Nebere ohled na zadané preference a striktní pravidla.
+- **Hledací algoritmus** — Pokročilý optimalizační výpočet. Vyhodnocuje všechna zadaná kritéria, respektuje striktní pravidla a maximalizuje celkovou spokojenost třídy podle nastavených vah. (Algoritmus se nesnaží o nejlepší *průměrnou* spokojenost — cílí na to, aby byli spokojeni všichni alespoň nějak, a neupřednostňuje pár extrémně spokojených žáků na úkor jiných).
 
 ---
 
@@ -107,8 +107,8 @@ Pokud nechcete žáky posazovat na místa ručně tlačítkem **„+"** u každ�
 
 V nabídce **„Soubor"** naleznete standardní funkce pro správu projektu:
 
-- **Nový / Otevřít / Uložit / Uložit jako** — Správa projektových souborů zasedacího pořádku (`.json` / `.dat`).
-- **Exportovat do PDF...** — Vygeneruje čistý tiskový dokument. Před samotným exportem zadáte **Nadpis** (např. *třída 8.A*) a **Podnadpis** (např. *Školní rok 2026/2027*), které se zobrazí v záhlaví výsledného PDF plánku.
+- **Nový / Otevřít / Uložit / Uložit jako** — Správa projektových souborů zasedacího pořádku (`.zsp`).
+- **Exportovat do PDF...** — Vygeneruje čistý tiskový dokument. Před samotným exportem zadáte **Nadpis** (např. *Třída 8.A*) a **Podnadpis** (např. *Školní rok 2026/2027*, nebo jméno třídního učitele), které se zobrazí v záhlaví výsledného PDF plánku.
 
 ---
 
