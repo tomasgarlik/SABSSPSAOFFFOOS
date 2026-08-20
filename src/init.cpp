@@ -87,7 +87,7 @@ if (retina){
     scale=1.0;
 }
 window = SDL_CreateWindow(
-    "SABSSPSAOFFFOOS Beta",
+    "zasedaci poradek",
     SDL_WINDOWPOS_CENTERED, 
     SDL_WINDOWPOS_CENTERED,
     800, 600,  // při MAXIMIZED se ignoruje

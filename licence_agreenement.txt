@@ -15,10 +15,12 @@ NEKOPIRUJTE ANI JINAK NEPOUŽÍVEJTE TENTO PROGRAM.
 včetně jeho zdrojového kódu, spustitelných souborů, dokumentace,
 instalačních souborů a veškerých souvisejících materiálů.
 
-1.2 „Autorem" se rozumí Tomáš Garlík, fyzická osoba, která Program
-vytvořila a je nositelem autorských práv k Programu v rozsahu, v jakém
-tato práva nejsou omezena právy třetích stran k součástem, na kterých
-Program staví (viz článek 7).
+1.2 „Autorem" se rozumí Tomáš Garlík, fyzická osoba – nezletilý autor,
+který Program vytvořil v rámci svého osobního/indie projektu a je
+nositelem autorských práv k Programu v rozsahu, v jakém tato práva
+nejsou omezena právy třetích stran k součástem, na kterých Program
+staví (viz článek 7). Program je vytvářen a zveřejňován s vědomím
+zákonného zástupce Autora.
 
 1.3 „Uživatelem" se rozumí jakákoliv fyzická nebo právnická osoba, která
 Program instaluje, kopíruje, šíří nebo jiným způsobem používá.
@@ -59,21 +61,36 @@ udělena, si Autor vyhrazuje.
 Programu na Uživatele. Uživatel získává pouze právo Program užívat v
 rozsahu stanoveném tímto ujednáním.
 
+3.3 Program vznikl jako soukromá iniciativa Autora mimo jakýkoliv
+pracovněprávní nebo obdobný vztah. Žádná instituce, organizace, škola
+ani jiná třetí strana, pro jejíž potřebu nebo na jejíž podnět mohl být
+Program vytvořen či použit, nezískává tímto ujednáním ani samotnou
+skutečností použití Programu žádná vlastnická, licenční ani jiná práva
+k Programu nad rámec běžného užívání jako Uživatel dle článku 2. Převod
+jakýchkoli práv k Programu (včetně práva Program prodávat, dále
+licencovat nebo jej uzavřít pro výhradní užití třetí strany) je možný
+výhradně na základě samostatné písemné dohody podepsané Autorem,
+případně jeho zákonným zástupcem.
+
 4. INSTALACE A FUNKČNOST
 
 4.1 Program může v rámci své činnosti vytvářet, upravovat nebo ukládat
 soubory, data či jiný obsah na zařízení Uživatele (dále jen „generovaný
-obsah"). Autor nenese žádnou odpovědnost za generovaný obsah, jeho
-povahu, obsahový soulad s očekáváním Uživatele ani za jakékoliv
-důsledky, které z existence, použití, uložení nebo šíření takového
-generovaného obsahu Uživateli nebo třetím stranám vzniknou.
+obsah"). Ani Autor, ani jeho zákonný zástupce nenesou žádnou
+odpovědnost za generovaný obsah, jeho povahu, obsahový soulad
+s očekáváním Uživatele ani za jakékoliv důsledky, které z existence,
+použití, uložení nebo šíření takového generovaného obsahu Uživateli
+nebo třetím stranám vzniknou.
 
-4.2 Uživatel bere na vědomí, že Program byl vytvořen jako indie projekt a jako takový nemusí splňovat nároky na bezchybnost, stabilitu
-nebo bezpečnost srovnatelné s komerčním softwarem.
+4.2 Uživatel bere na vědomí, že Program byl vytvořen jako osobní/indie
+projekt nezletilého autora, a jako takový nemusí splňovat nároky na
+bezchybnost, stabilitu nebo bezpečnost srovnatelné s komerčním
+softwarem.
 
-4.3 Autor nezaručuje, že Program bude funkční na všech zařízeních,
-operačních systémech nebo konfiguracích, ani že bude kompatibilní s
-budoucími verzemi operačních systémů nebo ovladačů.
+4.3 Autor ani jeho zákonný zástupce nezaručují, že Program bude
+funkční na všech zařízeních, operačních systémech nebo konfiguracích,
+ani že bude kompatibilní s budoucími verzemi operačních systémů nebo
+ovladačů.
 
 5. OCHRANA OSOBNÍCH ÚDAJŮ A ZPRACOVÁNÍ DAT
 
@@ -90,17 +107,20 @@ dat na vzdálené servery, třetím stranám ani Autorovi. Zadané osobní
 5.3 Veškerá data zadaná do Programu jsou uložena pouze v rámci
 souborů Programu na zařízení Uživatele. Za jejich zabezpečení, zálohu a
 soulad se zákonnými povinnostmi při zpracování osobních údajů (např.
-GDPR) odpovídá Uživatel, případně instituce, v rámci které je
-Program používán.
+GDPR) odpovídá výhradně Uživatel, případně instituce, v rámci které je
+Program používán. Autor ani jeho zákonný zástupce za tuto oblast
+neodpovídají.
 
 6. VYLOUČENÍ ZÁRUK
 
 6.1 PROGRAM JE POSKYTOVÁN „TAK, JAK JE" (AS IS), BEZ JAKÝCHKOLIV ZÁRUK,
-VÝSLOVNÝCH NEBO IMPLICITNÍCH, VČETNĖ, ALE NIKOLIV VÝLUČNĖ, ZÁRUK
+VÝSLOVNÝCH NEBO IMPLICITNÍCH, VČETNĚ, ALE NIKOLIV VÝLUČNĚ, ZÁRUK
 PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL A NEPORUŠENÍ PRÁV TŘETÍCH STRAN.
+TOTO VYLOUČENÍ ZÁRUK SE VZTAHUJE STEJNOU MĚROU NA AUTORA I NA JEHO
+ZÁKONNÉHO ZÁSTUPCE.
 
-6.2 Autor nezaručuje, že Program bude fungovat nepřerušeně, bezchybně
-nebo že případné chyby budou opraveny.
+6.2 Ani Autor, ani jeho zákonný zástupce nezaručují, že Program bude
+fungovat nepřerušeně, bezchybně nebo že případné chyby budou opraveny.
 
 7. SOFTWARE TŘETÍCH STRAN
 
@@ -122,21 +142,38 @@ jako volné dílo (public domain) s doložkou „Public domain license - no
 warranty implied; use at your own risk." Tato knihovna je tedy užívána
 bez nároku třetí strany na autorská práva, a to bez jakékoliv záruky.
 
-7.4 Autorská práva ke knihovnám uvedeným v tomto článku a jejich
+7.4 Program dále využívá knihovnu tinyfiledialogs, distribuovanou pod
+licencí zlib/libpng. Text této licence je dostupný v repozitáři
+knihovny na adrese https://github.com/native-toolkit/tinyfiledialogs
+a je nedílnou součástí licenčních podmínek vztahujících se na
+příslušnou součást Programu.
+
+7.5 Program dále využívá knihovnu maximum-weight-matching (soubory
+mwmatching.hpp, concatenable_queue.hpp a priority_queue.hpp), jejímž
+autorem je Joris van Rantwijk a která je distribuována pod licencí MIT
+(Expat License). Text této licence je dostupný na adrese
+https://git.jorisvr.nl/joris/maximum-weight-matching a je nedílnou
+součástí licenčních podmínek vztahujících se na příslušnou součást
+Programu.
+
+7.6 Autorská práva ke knihovnám uvedeným v tomto článku a jejich
 součástem náleží jejich příslušným vlastníkům a nejsou tímto
 ujednáním nijak dotčena.
 
-8. OMEZENÍ ODPOVĖDNOSTI
+8. OMEZENÍ ODPOVĚDNOSTI
 
-8.1 Autor v maximálním rozsahu povoleném příslušnými právními předpisy
-neodpovídá za jakoukoliv přímou, nepřímou, náhodnou, zvláštní,
-následnou nebo jinou škodu (včetně, ale nikoliv výlučně, ztráty dat,
-ztráty zisku, přerušení provozu nebo poškození zařízení), která vznikne
-v souvislosti s instalací, používáním nebo nemožností používat Program,
-a to i v případě, že byl na možnost vzniku takové škody upozorněn.
+8.1 Ani Autor, ani jeho zákonný zástupce v maximálním rozsahu povoleném
+příslušnými právními předpisy neodpovídají za jakoukoliv přímou,
+nepřímou, náhodnou, zvláštní, následnou nebo jinou škodu (včetně, ale
+nikoliv výlučně, ztráty dat, ztráty zisku, přerušení provozu nebo
+poškození zařízení), která vznikne v souvislosti s instalací, používáním
+nebo nemožností používat Program, a to i v případě, že byli na možnost
+vzniku takové škody upozorněni.
 
 8.2 Uživatel používá Program na vlastní riziko a nese plnou odpovědnost
-za výsledky jeho použití.
+za výsledky jeho použití. Uživatel bere na vědomí, že Program je dílem
+nezletilého autora a že veškerá rizika spojená s jeho použitím nese
+sám Uživatel.
 
 9. DOBA TRVÁNÍ A UKONČENÍ
 
@@ -147,7 +184,7 @@ poruší podmínky tohoto ujednání.
 9.2 Po ukončení licence je Uživatel povinen veškeré kopie Programu, ke
 kterým má přístup, odinstalovat nebo trvale odstranit.
 
-10. ZÁVĖREČNÁ USTANOVENÍ
+10. ZÁVĚREČNÁ USTANOVENÍ
 
 10.1 Toto ujednání se řídí právním řádem České republiky.
 
@@ -166,3 +203,102 @@ Instalací a používáním Programu Uživatel potvrzuje, že si toto ujednání
 přečetl, rozumí mu a souhlasí s jeho podmínkami.
 
 © Tomáš Garlík. Všechna práva vyhrazena v rozsahu neudělené licencí.
+
+================================================================
+PŘÍLOHA: ÚPLNÁ ZNĚNÍ LICENCÍ POUŽITÝCH KNIHOVEN TŘETÍCH STRAN
+================================================================
+
+--- SDL2 (zlib license) ---
+  Simple DirectMedia Layer
+  Copyright (C) 1997-2024 Sam Lantinga <slouken@libsdl.org>
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+
+
+--- nlohmann/json (MIT License) ---
+MIT License 
+
+Copyright (c) 2013-2026 Niels Lohmann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--- pdfgen (Public domain / Unlicense) ---
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org>
+
+--- tinyfiledialogs (zlib/libpng license) ---
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+1. The origin of this software must not be misrepresented; you must not
+claim that you wrote the original software.  If you use this software
+in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+
+
+--- maximum-weight-matching (MIT License, Joris van Rantwijk) ---
+Copyright (c) 2023-2024 Joris van Rantwijk
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
