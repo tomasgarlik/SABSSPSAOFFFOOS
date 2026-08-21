@@ -657,7 +657,7 @@ SDL_GetWindowSize(window, &width, &height);
                 SDL_Rect rect = { 0, height-STANDARTPICEHEIGHT, width, STANDARTPICEHEIGHT };
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
                 SDL_RenderFillRect(renderer, &rect);
-                rect = { 0, height-STANDARTPICEHEIGHT+STANDARTBORDER, (int)((float)(width)*(float)(progress)/100.0f), STANDARTPICEHEIGHT-STANDARTBORDER*2 };
+                rect = { 0, height-STANDARTPICEHEIGHT+STANDARTBORDER, (int)((float)(width)*(float)(overall_progress)/100.0f), STANDARTPICEHEIGHT-STANDARTBORDER*2 };
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
                 SDL_RenderFillRect(renderer, &rect);
             }
