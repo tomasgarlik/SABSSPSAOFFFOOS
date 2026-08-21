@@ -418,7 +418,7 @@ if (retina){
     scale=1.0;
 }
 window = SDL_CreateWindow(
-    "zasedaci poradek",
+    "Aktualizacovátor",
     SDL_WINDOWPOS_CENTERED, 
     SDL_WINDOWPOS_CENTERED,
     700, 500,  // při MAXIMIZED se ignoruje
