@@ -225,11 +225,22 @@ static void InternalGitPullWorker(std::string gitPath="git") {
 
     char buffer[256];
     std::string currentLine = "";
+    size_t bytesRead;
 
-    while (fgets(buffer, sizeof(buffer), pipe) != NULL) {
-        currentLine = buffer;
-        if (std::regex_search(currentLine, match, percentRegex)) {
-            g_Progress = std::stoi(match[1].str());
+    // Čteme syrová data (ne po řádcích), stejně jako Windows verze,
+    // protože git progress odděluje aktualizace znakem \r, ne \n
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer) - 1, pipe)) > 0) {
+        buffer[bytesRead] = '\0';
+        currentLine += buffer;
+
+        size_t pos = 0;
+        while ((pos = currentLine.find_first_of("\r\n")) != std::string::npos) {
+            std::string line = currentLine.substr(0, pos);
+            currentLine.erase(0, pos + 1);
+
+            if (std::regex_search(line, match, percentRegex)) {
+                g_Progress = std::stoi(match[1].str());
+            }
         }
     }
 
