@@ -78,6 +78,7 @@ bool IsGitHubReachable(std::string& errorMessage, std::string gitPath = "git", s
 }
 // 1. FUNKCE: Zjistí, zda jsou k dispozici nové aktualizace (vrací true/false)
 bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
+    printf("checking for updates...\n");
     // Provedeme fetch na pozadí, abychom zjišťovali stav proti vzdálenému repozitáři
 #ifdef _WIN32
     // Přidán parametr --dry-run
@@ -90,7 +91,11 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
 
     ExecCmdSimple(fetchCmd); // Stáhne nejnovější stav ze serveru
     std::string output = ExecCmdSimple(logCmd);
-
+    if (output.empty()){
+        printf("no updates found\n");
+    } else {
+        printf("updates found\n");
+    }
     // Pokud výstup logu není prázdný, existují commity, které v lokální verzi chybí
     return !output.empty();
 }
@@ -268,9 +273,12 @@ int main(int argc, char* argv[]) {
     std::string gitError;
 
     // Předáme proměnnou gitError, do které se zapíše případná chyba
+    printf("checking for git reachable...\n");
     if (!IsGitHubReachable(gitError, gitPath)) {
         printf("Chyba připojení: %s\n", gitError.c_str());
         pull_state=3;
+    } else {
+        printf("github is reachable\n");
     }
     if (CheckForUpdates(gitPath) || pull_state==3) {
         printf("making window shii\n");
