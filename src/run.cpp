@@ -79,27 +79,40 @@ bool IsGitHubReachable(std::string& errorMessage, std::string gitPath = "git", s
 // 1. FUNKCE: Zjistí, zda jsou k dispozici nové aktualizace (vrací true/false)
 bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
     printf("checking for updates...\n");
-    // Provedeme fetch na pozadí, abychom zjišťovali stav proti vzdálenému repozitáři
+
+    // 1. Zjistíme hash posledního LOKÁLNÍHO commitu (HEAD)
 #ifdef _WIN32
-    // Přidán parametr --dry-run
-    std::string fetchCmd = "\"" + gitPath + "\" fetch --dry-run origin " + branch + " 2>&1";
-    std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --oneline 2>&1";
+    std::string localCmd  = "\"" + gitPath + "\" rev-parse HEAD 2>&1";
+    std::string remoteCmd = "\"" + gitPath + "\" ls-remote origin " + branch + " 2>&1";
 #else
-    std::string fetchCmd = gitPath + " fetch --dry-run origin " + branch + " 2>&1";
-    std::string logCmd   = gitPath + " log HEAD..origin/" + branch + " --oneline 2>&1";
+    std::string localCmd  = gitPath + " rev-parse HEAD 2>&1";
+    std::string remoteCmd = gitPath + " ls-remote origin " + branch + " 2>&1";
 #endif
 
-    ExecCmdSimple(fetchCmd); // Stáhne nejnovější stav ze serveru
-    std::string output = ExecCmdSimple(logCmd);
-    if (output.empty()){
-        printf("no updates found\n");
-    } else {
-        printf("updates found\n");
-    }
-    // Pokud výstup logu není prázdný, existují commity, které v lokální verzi chybí
-    return !output.empty();
-}
+    std::string localHash = ExecCmdSimple(localCmd);
+    std::string remoteOutput = ExecCmdSimple(remoteCmd);
 
+    // Ořízneme případné odřádkování (\n)
+    while (!localHash.empty() && (localHash.back() == '\n' || localHash.back() == '\r')) localHash.pop_back();
+
+    // Vyextrahujeme samotný hash z výstupu ls-remote (vypadá jako: "85e5d4c... refs/heads/main")
+    std::string remoteHash = "";
+    if (!remoteOutput.empty()) {
+        size_t spacePos = remoteOutput.find_first_of(" \t");
+        if (spacePos != std::string::npos) {
+            remoteHash = remoteOutput.substr(0, spacePos);
+        }
+    }
+
+    // Pokud se lokální a vzdálený hash neshodují, je k dispozici aktualizace!
+    if (!remoteHash.empty() && localHash != remoteHash) {
+        printf("updates found!\n");
+        return true;
+    }
+
+    printf("no updates found\n");
+    return false;
+}
 // 2. FUNKCE: Vrátí seznam (vector) všech nových commit zpráv
 std::vector<std::string> GetCommitNotes(std::string gitPath = "git", std::string branch = "main") {
     std::vector<std::string> notes;
