@@ -281,7 +281,7 @@ int main(int argc, char* argv[]) {
         printf("github is reachable\n");
     }
     if (CheckForUpdates(gitPath) || pull_state==3) {
-        printf("making window shii\n");
+        printf("continuing with making window\n");
         // Jsou dostupné nové změny!
         std::vector<std::string> changes = GetCommitNotes(gitPath);
 if (SDL_Init(SDL_INIT_VIDEO) != 0) {
