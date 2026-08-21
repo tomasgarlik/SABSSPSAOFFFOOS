@@ -485,7 +485,7 @@ SDL_SetWindowIcon(window, IMG_Load("icons/icon.png"));
 SDL_GetWindowSize(window, &width, &height);
         float progress_shift=0.0f;
         int overall_progress=0;
-        #define MAX_PROGRESS_SHIFT 50.0f
+        #define MAX_PROGRESS_SHIFT 70.0f
         std::string endstring;
         #define ENDSTRING_PERIOD 500
         while (running){
@@ -580,7 +580,7 @@ SDL_GetWindowSize(window, &width, &height);
                     }
                 });
                 progress=GetGitProgress();
-                progress_shift+=(MAX_PROGRESS_SHIFT-progress_shift)/500.0f;
+                progress_shift+=(MAX_PROGRESS_SHIFT-progress_shift)/200.0f;
                 overall_progress=progress>(int)progress_shift?progress:(int)progress_shift;
                 p.scrollable_elements.push_back({
                     .type=ELEMENT_LABEL,
