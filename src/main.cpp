@@ -1,6 +1,6 @@
 #include "includes.hpp"
 
-int select_gender(int student){
+int select_gender_from_many(int student){
     rn=true;
     label l={
         .text="Vyberte pohlaví",
@@ -23,6 +23,7 @@ int select_gender(int student){
 
     int index=0;
     for (auto& g:genders){
+        if (index==0||index==1){index++;continue;}
         p.scrollable_elements.push_back({
             .type = ELEMENT_BUTTON,
             .button = {
@@ -50,6 +51,68 @@ int select_gender(int student){
         SDL_RenderPresent(renderer);
     }
     return gend;
+}
+int select_gender(int student){
+    int start_gend=gend;
+    rn=true;
+    label l={
+        .text="Vyberte pohlaví",
+        .textsize=STANDARTPICEHEIGHT,
+        .xpos=width/2,
+        .ypos=0,
+        .origin_left=false
+    };
+    panel p={};
+    p.top_elements.push_back({.type=ELEMENT_LABEL,.label=l});
+    p.bottom_elements.push_back({
+        .type = ELEMENT_BUTTON,
+        .button = {
+            .texture = createTextTexture(renderer,"Zrušit"),
+            .xpos =width-160,
+            .ypos=0,
+            .function = [](){rn=false;}
+        }
+    });
+
+    int index=0;
+    static const std::vector<std::string> genders_small = {
+        "Muž",
+        "Žena",
+        "Jiné..."
+    };
+    for (auto& g:genders_small){
+        p.scrollable_elements.push_back({
+            .type = ELEMENT_BUTTON,
+            .button = {
+                .texture = createTextTexture(renderer,g),
+                .xpos = 0,
+                .ypos=(int)(p.scrollable_elements.size())*(STANDARTPICEHEIGHT),
+                .function = [index]() {gend=index;rn=false;}
+            }
+        });
+        index++;
+    }
+    p.w=width;
+    p.h=height;
+    p.x=0;
+    p.y=0;
+
+
+    while (rn && running){
+        SDL_RenderClear(renderer);
+        if (clickup){clickup=false;}
+        handle_events();
+        updatePanel(renderer, &p);
+        click_in_meziprostor=false;
+        if (clic && !clickedOnSomething){click_in_meziprostor=true;}
+        SDL_RenderPresent(renderer);
+    }
+    if (gend!=2){
+        return gend;
+    } else {
+        gend=start_gend;
+        return select_gender_from_many(student);
+    }
 }
 void confirm_student(int student){
     project.students[student].name=editstudent_panel.scrollable_elements[1].textbox.text;

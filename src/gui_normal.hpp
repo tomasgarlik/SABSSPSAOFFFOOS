@@ -676,7 +676,9 @@ void update0Panel(SDL_Renderer* renderer, panel* panelptr){
             total_content_height=get_element_pos(&e).y+STANDARTPICEHEIGHT+STANDARTBORDER*4;
         }
     }     
-
+    if (total_content_height==0){
+        total_content_height=1;
+    }
     // Calculate scrollbar height and position
     int scrollbar_range = total_content_height - scrollbar_area_height + bottom_size + STANDARTPICEHEIGHT;
     int scrollbar_height = 1;

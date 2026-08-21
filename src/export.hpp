@@ -364,6 +364,8 @@ SDL_SetRenderTarget(renderer, pagetex);
 // Vykreslíme texturu projektu
 SDL_RenderCopy(renderer, projektTex, NULL, &destRectTex);
 
+// TATO ŘÁDKA ZDE CHYBĚLA:
+SDL_DestroyTexture(projektTex);
 
 // Vrátíme renderer do původního stavu
 SDL_SetRenderTarget(renderer, stary_target);
