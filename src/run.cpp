@@ -8,6 +8,7 @@
 #else
     #include <cstdio>
     #include <cstdlib>
+    #include <unistd.h>
 #endif
 // FUNKCE: Ověří připojení k GitHubu a v případě chyby vrátí popis v errorMessage
 
@@ -273,6 +274,32 @@ void quitfunc(){
     return;
 }
 void newfunc(){}
+static void LaunchDetached(const std::string& path) {
+#ifdef _WIN32
+    STARTUPINFOA si = { sizeof(STARTUPINFOA) };
+    PROCESS_INFORMATION pi;
+
+    CreateProcessA(
+        NULL,
+        (LPSTR)path.c_str(),
+        NULL, NULL, FALSE,
+        DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP,
+        NULL, NULL,
+        &si, &pi
+    );
+    if (pi.hProcess) CloseHandle(pi.hProcess);
+    if (pi.hThread) CloseHandle(pi.hThread);
+#else
+    pid_t pid = fork();
+    if (pid == 0) {
+        // --- potomek ---
+        setsid(); // odpojí se od terminálu/rodiče
+        execl(path.c_str(), path.c_str(), (char*)NULL);
+        _exit(1); // execl se vrátí jen při chybě
+    }
+    // --- rodič (updater) pokračuje dál, nečeká ---
+#endif
+}
 int pull_state=0;
 #ifdef _WIN32
     std::string gitPath = ".\\git\\cmd\\git.exe";
@@ -280,8 +307,6 @@ int pull_state=0;
     std::string gitPath = "git";
 #endif
 int main(int argc, char* argv[]) {
-    #include "init.cpp"
-    printf("init done\n");
     std::string gitError;
 
     // Předáme proměnnou gitError, do které se zapíše případná chyba
@@ -636,9 +661,9 @@ SDL_GetWindowSize(window, &width, &height);
     }
     SDL_Quit();
     #ifdef _WIN32
-        ExecCmdSimple("./program_win64.exe");
+        LaunchDetached("./program_win64.exe");
     #else
-        ExecCmdSimple("./program");
+        LaunchDetached("./program");
     #endif
     return 0;
 }
