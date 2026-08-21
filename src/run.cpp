@@ -224,6 +224,7 @@ int main(int argc, char* argv[]) {
     #include "init.cpp"
     printf("init done\n");
     if (CheckForUpdates(gitPath)) {
+        printf("Updates available!\n");
         // Jsou dostupné nové změny!
         std::vector<std::string> changes = GetCommitNotes(gitPath);
 
