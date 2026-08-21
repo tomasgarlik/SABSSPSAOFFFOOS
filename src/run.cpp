@@ -9,8 +9,7 @@
     #include <cstdio>
     #include <cstdlib>
 #endif
-#include <vector>
-#include <sstream>
+// FUNKCE: Ověří připojení k GitHubu a v případě chyby vrátí popis v errorMessage
 
 // Pomocná funkce pro spuštění příkazu a přečtení jeho celého výstupu do stringu
 static std::string ExecCmdSimple(const std::string& cmd) {
@@ -34,7 +33,49 @@ static std::string ExecCmdSimple(const std::string& cmd) {
 #endif
     return result;
 }
+bool IsGitHubReachable(std::string& errorMessage, std::string gitPath = "git", std::string repoUrl = "origin") {
+    errorMessage = "";
 
+#ifdef _WIN32
+    std::string cmd = "\"" + gitPath + "\" ls-remote --exit-code " + repoUrl + " HEAD 2>&1";
+#else
+    std::string cmd = gitPath + " ls-remote --exit-code " + repoUrl + " HEAD 2>&1";
+#endif
+
+    std::string output = ExecCmdSimple(cmd);
+
+    // 1. Žádný výstup obvykle znamená selhání vykonání příkazu
+    if (output.empty()) {
+        errorMessage = "Chyba: Příkaz Git neodpovídá nebo nebyl nalezen.";
+        return false;
+    }
+
+    // 2. Analýza chybových hlášek z výstupu Gitu
+    if (output.find("Could not resolve host") != std::string::npos || 
+        output.find("network is unreachable") != std::string::npos ||
+        output.find("Failed to connect") != std::string::npos) {
+        errorMessage = "Nelze se připojit k síti. Zkontrolujte připojení k internetu.";
+        return false;
+    }
+
+    if (output.find("Repository not found") != std::string::npos) {
+        errorMessage = "Vzdálený repozitář na GitHubu nebyl nalezen.";
+        return false;
+    }
+
+    if (output.find("Permission denied") != std::string::npos || 
+        output.find("Authentication failed") != std::string::npos) {
+        errorMessage = "Chyba přístupových práv nebo autentizace k repozitáři.";
+        return false;
+    }
+
+    if (output.find("fatal:") != std::string::npos || output.find("error:") != std::string::npos) {
+        errorMessage = "Chyba Gitu: " + output;
+        return false;
+    }
+
+    return true; // Připojení je v pořádku
+}
 // 1. FUNKCE: Zjistí, zda jsou k dispozici nové aktualizace (vrací true/false)
 bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
     // Provedeme fetch na pozadí, abychom zjišťovali stav proti vzdálenému repozitáři
@@ -215,7 +256,7 @@ void quitfunc(){
     return;
 }
 void newfunc(){}
-int pull_state=0;
+int pull_state=-1;
 #ifdef _WIN32
     std::string gitPath = ".\\git\\cmd\\git.exe";
 #else
@@ -224,7 +265,17 @@ int pull_state=0;
 int main(int argc, char* argv[]) {
     #include "init.cpp"
     printf("init done\n");
-    if (CheckForUpdates(gitPath)) {
+    if (CheckForUpdates(gitPath)){
+        pull_state=0;
+    }
+    std::string gitError;
+
+    // Předáme proměnnou gitError, do které se zapíše případná chyba
+    if (!IsGitHubReachable(gitError, gitPath)) {
+        printf("Chyba připojení: %s\n", gitError.c_str());
+        pull_state=3;
+    }
+    if (pull_state!=-1) {
         printf("Updates available!\n");
         // Jsou dostupné nové změny!
         std::vector<std::string> changes = GetCommitNotes(gitPath);
@@ -509,6 +560,38 @@ SDL_GetWindowSize(window, &width, &height);
                         .function=[](){
                             running=false;
                         }
+                    }
+                });
+            } else if (pull_state==3){
+                p.top_elements.push_back({
+                    .type=ELEMENT_LABEL,
+                    .label={
+                        .xpos=width/2,
+                        .ypos=0,
+                        .text="Nepodařilo se vyhledat aktualizace",
+                        .textsize=STANDARTPICEHEIGHT,
+                        .origin_left=false
+                    }
+                });
+                p.bottom_elements.push_back({
+                    .type=ELEMENT_BUTTON,
+                    .button={
+                        .texture=createTextTexture(renderer, "Zavřít"),
+                        .xpos=width-75,
+                        .ypos=0,
+                        .function=[](){
+                            running=false;
+                        }
+                    }
+                });
+                p.scrollable_elements.push_back({
+                    .type=ELEMENT_LABEL,
+                    .label={
+                        .xpos=width/2,
+                        .ypos=0,
+                        .text=gitError,
+                        .textsize=STANDARTPICEHEIGHT,
+                        .origin_left=false
                     }
                 });
             }
