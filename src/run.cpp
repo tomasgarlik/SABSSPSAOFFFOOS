@@ -256,7 +256,7 @@ void quitfunc(){
     return;
 }
 void newfunc(){}
-int pull_state=-1;
+int pull_state=0;
 #ifdef _WIN32
     std::string gitPath = ".\\git\\cmd\\git.exe";
 #else
@@ -265,9 +265,6 @@ int pull_state=-1;
 int main(int argc, char* argv[]) {
     #include "init.cpp"
     printf("init done\n");
-    if (CheckForUpdates(gitPath)){
-        pull_state=0;
-    }
     std::string gitError;
 
     // Předáme proměnnou gitError, do které se zapíše případná chyba
@@ -275,8 +272,8 @@ int main(int argc, char* argv[]) {
         printf("Chyba připojení: %s\n", gitError.c_str());
         pull_state=3;
     }
-    if (pull_state!=-1) {
-        printf("Updates available!\n");
+    if (CheckForUpdates(gitPath) || pull_state==3) {
+        printf("making window shii\n");
         // Jsou dostupné nové změny!
         std::vector<std::string> changes = GetCommitNotes(gitPath);
 if (SDL_Init(SDL_INIT_VIDEO) != 0) {
