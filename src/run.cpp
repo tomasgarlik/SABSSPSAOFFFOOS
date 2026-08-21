@@ -114,30 +114,29 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
     return false;
 }
 // 2. FUNKCE: Vrátí seznam (vector) všech nových commit zpráv
+// Vylepšený GetCommitNotes - stáhne JEN zprávy commitů bez 100MB dat
 std::vector<std::string> GetCommitNotes(std::string gitPath = "git", std::string branch = "main") {
     std::vector<std::string> notes;
 
-    // Příkaz vytáhne pouze zprávy nových commitů (bez hashů)
+    // Stáhneme POUZE historii a texty, ignorujeme velké soubory (blob:none)
 #ifdef _WIN32
-    std::string cmd = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --format=%s 2>&1";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --filter=blob:none origin " + branch + " 2>&1";
+    std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --format=%s 2>&1";
 #else
-    std::string cmd = gitPath + " log HEAD..origin/" + branch + " --format=%s 2>&1";
+    std::string fetchCmd = gitPath + " fetch --filter=blob:none origin " + branch + " 2>&1";
+    std::string logCmd   = gitPath + " log HEAD..origin/" + branch + " --format=%s 2>&1";
 #endif
 
-    std::string output = ExecCmdSimple(cmd);
+    ExecCmdSimple(fetchCmd); // Trvá zlomek vteřiny!
+    std::string output = ExecCmdSimple(logCmd);
+
     if (output.empty()) return notes;
 
-    // Rozsekání výstupu po jednotlivých řádcích
     std::stringstream ss(output);
     std::string line;
     while (std::getline(ss, line)) {
-        // Oříznutí přebytečných znaků odřádkování (\r z Windows)
-        if (!line.empty() && line.back() == '\r') {
-            line.pop_back();
-        }
-        if (!line.empty()) {
-            notes.push_back(line);
-        }
+        if (!line.empty() && line.back() == '\r') line.pop_back();
+        if (!line.empty()) notes.push_back(line);
     }
 
     return notes;
