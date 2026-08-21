@@ -39,10 +39,11 @@ static std::string ExecCmdSimple(const std::string& cmd) {
 bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
     // Provedeme fetch na pozadí, abychom zjišťovali stav proti vzdálenému repozitáři
 #ifdef _WIN32
-    std::string fetchCmd = "\"" + gitPath + "\" fetch origin " + branch + " 2>&1";
+    // Přidán parametr --dry-run
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --dry-run origin " + branch + " 2>&1";
     std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --oneline 2>&1";
 #else
-    std::string fetchCmd = gitPath + " fetch origin " + branch + " 2>&1";
+    std::string fetchCmd = gitPath + " fetch --dry-run origin " + branch + " 2>&1";
     std::string logCmd   = gitPath + " log HEAD..origin/" + branch + " --oneline 2>&1";
 #endif
 
