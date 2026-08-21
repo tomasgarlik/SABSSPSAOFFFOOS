@@ -119,16 +119,15 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
 std::vector<std::string> GetCommitNotes(std::string gitPath = "git", std::string branch = "main") {
     std::vector<std::string> notes;
 
-    // Stáhneme POUZE historii a texty, ignorujeme velké soubory (blob:none)
 #ifdef _WIN32
-    std::string fetchCmd = "\"" + gitPath + "\" fetch --filter=blob:none origin " + branch + " 2>&1";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --filter=tree:0 --no-tags --quiet origin " + branch + " 2>&1";
     std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --format=%s 2>&1";
 #else
-    std::string fetchCmd = gitPath + " fetch --filter=blob:none origin " + branch + " 2>&1";
+    std::string fetchCmd = gitPath + " fetch --filter=tree:0 --no-tags --quiet origin " + branch + " 2>&1";
     std::string logCmd   = gitPath + " log HEAD..origin/" + branch + " --format=%s 2>&1";
 #endif
 
-    ExecCmdSimple(fetchCmd); // Trvá zlomek vteřiny!
+    ExecCmdSimple(fetchCmd);
     std::string output = ExecCmdSimple(logCmd);
 
     if (output.empty()) return notes;
