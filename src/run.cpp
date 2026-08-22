@@ -149,7 +149,7 @@ static std::atomic<bool> g_IsSuccess{false};
 // -------------------------------------------------------------------
 // INTERNÍ VLÁKNO (Nevoláš přímo, spouští ho StartGitPull)
 // -------------------------------------------------------------------
-static void InternalGitPullWorker(std::string gitPath="git") {
+static void InternalGitPullWorker(std::string gitPath = "git") {
     g_Progress = 0;
     g_IsFinished = false;
     g_IsSuccess = false;
@@ -157,9 +157,11 @@ static void InternalGitPullWorker(std::string gitPath="git") {
     std::regex percentRegex(R"((\d+)%)");
     std::smatch match;
 
+    // -------------------------------------------------------------------
+    // 1. FÁZE: FETCH (Stahování dat ze sítě: 0 % -> 85 %)
+    // -------------------------------------------------------------------
 #ifdef _WIN32
-    // --- WINDOWS IMPLEMENTACE ---
-    std::string cmd = "\"" + gitPath + "\" pull --progress origin main 2>&1";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --progress origin main 2>&1";
 
     HANDLE hRead, hWrite;
     SECURITY_ATTRIBUTES saAttr = { sizeof(SECURITY_ATTRIBUTES), NULL, TRUE };
@@ -177,7 +179,7 @@ static void InternalGitPullWorker(std::string gitPath="git") {
     si.wShowWindow = SW_HIDE;
 
     PROCESS_INFORMATION pi;
-    if (!CreateProcessA(NULL, (LPSTR)cmd.c_str(), NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi)) {
+    if (!CreateProcessA(NULL, (LPSTR)fetchCmd.c_str(), NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi)) {
         CloseHandle(hRead);
         CloseHandle(hWrite);
         g_IsFinished = true;
@@ -199,7 +201,8 @@ static void InternalGitPullWorker(std::string gitPath="git") {
             currentLine.erase(0, pos + 1);
 
             if (std::regex_search(line, match, percentRegex)) {
-                g_Progress = std::stoi(match[1].str());
+                int rawPercent = std::stoi(match[1].str());
+                g_Progress = static_cast<int>(rawPercent * 0.85); // 0-100% z fetche -> 0-85% celkově
             }
         }
     }
@@ -212,12 +215,16 @@ static void InternalGitPullWorker(std::string gitPath="git") {
     CloseHandle(pi.hThread);
     CloseHandle(hRead);
 
-    g_IsSuccess = (exitCode == 0);
+    if (exitCode != 0) {
+        g_IsSuccess = false;
+        g_IsFinished = true;
+        return;
+    }
 
 #else
     // --- MAC / LINUX IMPLEMENTACE ---
-    std::string cmd = gitPath + " pull --progress origin main 2>&1";
-    FILE* pipe = popen(cmd.c_str(), "r");
+    std::string fetchCmd = gitPath + " fetch --progress origin main 2>&1";
+    FILE* pipe = popen(fetchCmd.c_str(), "r");
     if (!pipe) {
         g_IsFinished = true;
         return;
@@ -227,8 +234,6 @@ static void InternalGitPullWorker(std::string gitPath="git") {
     std::string currentLine = "";
     size_t bytesRead;
 
-    // Čteme syrová data (ne po řádcích), stejně jako Windows verze,
-    // protože git progress odděluje aktualizace znakem \r, ne \n
     while ((bytesRead = fread(buffer, 1, sizeof(buffer) - 1, pipe)) > 0) {
         buffer[bytesRead] = '\0';
         currentLine += buffer;
@@ -239,17 +244,46 @@ static void InternalGitPullWorker(std::string gitPath="git") {
             currentLine.erase(0, pos + 1);
 
             if (std::regex_search(line, match, percentRegex)) {
-                g_Progress = std::stoi(match[1].str());
+                int rawPercent = std::stoi(match[1].str());
+                g_Progress = static_cast<int>(rawPercent * 0.85); // 0-100% z fetche -> 0-85% celkově
             }
         }
     }
 
     int returnCode = pclose(pipe);
-    g_IsSuccess = (returnCode == 0);
+    if (returnCode != 0) {
+        g_IsSuccess = false;
+        g_IsFinished = true;
+        return;
+    }
 #endif
 
-    // Nastavení 100 % a příznaku dokončení
-    if (g_IsSuccess) g_Progress = 100;
+    // -------------------------------------------------------------------
+    // 2. FÁZE: MERGE (Aplikování změn na disk: 85 % -> 100 %)
+    // -------------------------------------------------------------------
+    g_Progress = 85;
+
+#ifdef _WIN32
+    std::string mergeCmd = "\"" + gitPath + "\" merge --ff-only origin/main 2>&1";
+#else
+    std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
+#endif
+
+    // Pro samotný merge stačí použít tvou pomocnou funkci ExecCmdSimple
+    std::string mergeOutput = ExecCmdSimple(mergeCmd);
+
+    // Kontrola, zda merge nekončí chybou (např. konflikt)
+    if (mergeOutput.find("fatal:") != std::string::npos || 
+        mergeOutput.find("error:") != std::string::npos ||
+        mergeOutput.find("CONFLICT") != std::string::npos) {
+        g_IsSuccess = false;
+        g_IsFinished = true;
+        return;
+    }
+
+    // Vše proběhlo v pořádku
+    g_Progress = 100;
+    g_IsSuccess = true;
     g_IsFinished = true;
 }
 
