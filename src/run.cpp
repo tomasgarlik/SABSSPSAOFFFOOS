@@ -615,7 +615,8 @@ SDL_GetWindowSize(window, &width, &height);
                 });
                 progress=GetGitProgress();
                 progress_shift+=(MAX_PROGRESS_SHIFT-progress_shift)/200.0f;
-                overall_progress=progress>(int)progress_shift?progress:(int)progress_shift;
+                // overall_progress=progress>(int)progress_shift?progress:(int)progress_shift;
+                overall_progress=progress;
                 p.scrollable_elements.push_back({
                     .type=ELEMENT_LABEL,
                     .label={
