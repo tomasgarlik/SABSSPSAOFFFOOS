@@ -107,7 +107,7 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
             remoteHash.pop_back();
     }
 
-    
+
     // DEBUG - po opravě to smažeš
     printf("local hash:  [%s] len=%zu\n", localHash.c_str(), localHash.size());
     printf("remote hash: [%s] len=%zu\n", remoteHash.c_str(), remoteHash.size());
@@ -159,23 +159,26 @@ static std::atomic<bool> g_IsSuccess{false};
 // -------------------------------------------------------------------
 // INTERNÍ VLÁKNO (Nevoláš přímo, spouští ho StartGitPull)
 // -------------------------------------------------------------------
+
+
 static void InternalGitPullWorker(std::string gitPath = "git") {
     g_Progress = 0;
     g_IsFinished = false;
     g_IsSuccess = false;
 
+    printf("InternalGitPullWorker started, gitPath: %s\n", gitPath.c_str());
+
     std::regex percentRegex(R"((\d+)%)");
     std::smatch match;
 
-    // -------------------------------------------------------------------
-    // 1. FÁZE: FETCH (Stahování dat ze sítě: 0 % -> 85 %)
-    // -------------------------------------------------------------------
 #ifdef _WIN32
     std::string fetchCmd = "\"" + gitPath + "\" fetch --progress origin main 2>&1";
+    printf("fetch cmd: %s\n", fetchCmd.c_str());
 
     HANDLE hRead, hWrite;
     SECURITY_ATTRIBUTES saAttr = { sizeof(SECURITY_ATTRIBUTES), NULL, TRUE };
     if (!CreatePipe(&hRead, &hWrite, &saAttr, 0)) {
+        printf("CreatePipe FAILED\n");
         g_IsFinished = true;
         return;
     }
@@ -190,19 +193,23 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
 
     PROCESS_INFORMATION pi;
     if (!CreateProcessA(NULL, (LPSTR)fetchCmd.c_str(), NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi)) {
+        printf("CreateProcess FAILED, error: %lu\n", GetLastError());
         CloseHandle(hRead);
         CloseHandle(hWrite);
         g_IsFinished = true;
         return;
     }
+    printf("CreateProcess OK, waiting for output...\n");
     CloseHandle(hWrite);
 
     char buffer[256];
     DWORD bytesRead;
     std::string currentLine = "";
+    std::string allOutput = "";
 
     while (ReadFile(hRead, buffer, sizeof(buffer) - 1, &bytesRead, NULL) && bytesRead > 0) {
         buffer[bytesRead] = '\0';
+        allOutput += buffer;
         currentLine += buffer;
 
         size_t pos = 0;
@@ -210,29 +217,36 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
             std::string line = currentLine.substr(0, pos);
             currentLine.erase(0, pos + 1);
 
+            if (!line.empty()) printf("fetch line: [%s]\n", line.c_str());
+
             if (std::regex_search(line, match, percentRegex)) {
                 int rawPercent = std::stoi(match[1].str());
-                g_Progress = static_cast<int>(rawPercent * 0.85); // 0-100% z fetche -> 0-85% celkově
+                g_Progress = static_cast<int>(rawPercent * 0.85);
+                printf("progress: %d%%\n", (int)g_Progress);
             }
         }
     }
 
+    printf("fetch all output: [%s]\n", allOutput.c_str());
+
     WaitForSingleObject(pi.hProcess, INFINITE);
     DWORD exitCode;
     GetExitCodeProcess(pi.hProcess, &exitCode);
+    printf("fetch exit code: %lu\n", exitCode);
 
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
     CloseHandle(hRead);
 
     if (exitCode != 0) {
+        printf("fetch FAILED with exit code %lu\n", exitCode);
         g_IsSuccess = false;
         g_IsFinished = true;
         return;
     }
-
+    printf("fetch OK\n");
 #else
-    // --- MAC / LINUX IMPLEMENTACE ---
+// --- MAC / LINUX IMPLEMENTACE ---
     std::string fetchCmd = gitPath + " fetch --progress origin main 2>&1";
     FILE* pipe = popen(fetchCmd.c_str(), "r");
     if (!pipe) {
@@ -268,10 +282,8 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     }
 #endif
 
-    // -------------------------------------------------------------------
-    // 2. FÁZE: MERGE (Aplikování změn na disk: 85 % -> 100 %)
-    // -------------------------------------------------------------------
     g_Progress = 85;
+    printf("starting merge...\n");
 
 #ifdef _WIN32
     std::string mergeCmd = "\"" + gitPath + "\" merge --ff-only origin/main 2>&1";
@@ -279,30 +291,31 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
 #endif
 
-    // Pro samotný merge stačí použít tvou pomocnou funkci ExecCmdSimple
+    printf("merge cmd: %s\n", mergeCmd.c_str());
     std::string mergeOutput = ExecCmdSimple(mergeCmd);
+    printf("merge output: [%s]\n", mergeOutput.c_str());
 
-    // Kontrola, zda merge nekončí chybou (např. konflikt)
     if (mergeOutput.find("fatal:") != std::string::npos || 
         mergeOutput.find("error:") != std::string::npos ||
         mergeOutput.find("CONFLICT") != std::string::npos) {
+        printf("merge FAILED\n");
         g_IsSuccess = false;
         g_IsFinished = true;
         return;
     }
 
-    // Vše proběhlo v pořádku
+    printf("merge OK, all done!\n");
     g_Progress = 100;
     g_IsSuccess = true;
     g_IsFinished = true;
 }
-
 // ===================================================================
 // TVOJE 2 POŽADOVANÉ FUNKCE + KONTROLA
 // ===================================================================
 
 // 1. FUNKCE: Odstartuje git pull na pozadí
 void StartGitPull(std::string gitPath = "git") {
+    printf("started git pull\n");
     std::thread t(InternalGitPullWorker, gitPath);
     t.detach(); // Odpojí vlákno, takže běží autonomně a neblokuje hlavní kód
 }
@@ -486,6 +499,8 @@ if (retina){
 } else {
     scale=1.0;
 }
+printf("creating window... ");;
+
 window = SDL_CreateWindow(
     "Aktualizacovátor",
     SDL_WINDOWPOS_CENTERED, 
@@ -503,6 +518,7 @@ if (!window) {
     SDL_Quit();
     return 1;
 }
+printf("done\ncreating renderer... ");
 renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 if (!renderer) {
@@ -515,6 +531,7 @@ if (!renderer) {
     SDL_Quit();
     return 1;
 }
+printf("done\n finishing... ");
 dropmenu filemenu = {
     .functions={
         newfunc,
@@ -557,6 +574,7 @@ SDL_GetWindowSize(window, &width, &height);
         #define MAX_PROGRESS_SHIFT 70.0f
         std::string endstring;
         #define ENDSTRING_PERIOD 500
+        printf("done\nstarting main loop\n");
         while (running){
             if (clickup){clickup=false;}
             SDL_GetRendererOutputSize(renderer, &width, &height);
