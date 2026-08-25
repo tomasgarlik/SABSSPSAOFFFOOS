@@ -38,7 +38,7 @@ InfoAfterFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\info_end.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS
+OutputDir=C:\Users\Tomas\Desktop\
 OutputBaseFilename=instalator
 SetupIconFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\icons\icon.ico
 SolidCompression=yes
