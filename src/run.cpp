@@ -116,19 +116,22 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
 }
 // 2. FUNKCE: Vrátí seznam (vector) všech nových commit zpráv
 // Vylepšený GetCommitNotes - stáhne JEN zprávy commitů bez 100MB dat
-std::vector<std::string> GetCommitNotes(std::string gitPath = "git", std::string branch = "main") {
+std::vector<std::string> GetCommitNotes(std::string gitPath, std::string branch="main") {
     std::vector<std::string> notes;
 
 #ifdef _WIN32
-    std::string fetchCmd = "\"" + gitPath + "\" fetch --filter=tree:0 --no-tags --quiet origin " + branch + " 2>&1";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --no-tags --quiet origin " + branch + " 2>&1";
     std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --format=%s 2>&1";
 #else
-    std::string fetchCmd = gitPath + " fetch --filter=tree:0 --no-tags --quiet origin " + branch + " 2>&1";
+    std::string fetchCmd = gitPath + " fetch --no-tags --quiet origin " + branch + " 2>&1";
     std::string logCmd   = gitPath + " log HEAD..origin/" + branch + " --format=%s 2>&1";
 #endif
 
-    ExecCmdSimple(fetchCmd);
+    std::string fetchOutput = ExecCmdSimple(fetchCmd);
+    printf("fetch output: %s\n", fetchOutput.c_str()); // DEBUG
+
     std::string output = ExecCmdSimple(logCmd);
+    printf("log output: %s\n", output.c_str()); // DEBUG
 
     if (output.empty()) return notes;
 
@@ -345,27 +348,9 @@ static void LaunchDetached(const std::string& path) {
 #endif
 }
 int pull_state=0;
-#ifdef _WIN32
-    std::string gitPath = ".\\git\\cmd\\git.exe";
-#else
-    std::string gitPath = "git";
-#endif
+std::string gitPath = "";
 int main(int argc, char* argv[]) {
-    std::string gitError;
-
-    // Předáme proměnnou gitError, do které se zapíše případná chyba
-    printf("checking for git reachable...\n");
-    if (!IsGitHubReachable(gitError, gitPath)) {
-        printf("Chyba připojení: %s\n", gitError.c_str());
-        pull_state=3;
-    } else {
-        printf("github is reachable\n");
-    }
-    if (CheckForUpdates(gitPath) || pull_state==3) {
-        printf("continuing with making window\n");
-        // Jsou dostupné nové změny!
-        std::vector<std::string> changes = GetCommitNotes(gitPath);
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     SDL_ShowSimpleMessageBox(
         SDL_MESSAGEBOX_ERROR,
         "Somthing went wrong during the initalization of SDL2.",
@@ -433,6 +418,49 @@ while (running) {
         running = false;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    std::string gitError;
+    #ifdef _WIN32
+    char exePath[MAX_PATH];
+    GetModuleFileNameA(NULL, exePath, MAX_PATH);
+    std::string exeDir = std::string(exePath).substr(0, std::string(exePath).find_last_of("\\/"));
+    gitPath = exeDir + "\\git\\cmd\\git.exe";
+    #else
+        gitPath = "git";
+    #endif
+    printf("git path: %s\n", gitPath.c_str());
+    // Předáme proměnnou gitError, do které se zapíše případná chyba
+    printf("checking for git reachable...\n");
+    if (!IsGitHubReachable(gitError, gitPath)) {
+        printf("Chyba připojení: %s\n", gitError.c_str());
+        pull_state=3;
+    } else {
+        printf("github is reachable\n");
+    }
+    if (CheckForUpdates(gitPath) || pull_state==3) {
+        printf("continuing with making window\n");
+        // Jsou dostupné nové změny!
+        std::vector<std::string> changes = GetCommitNotes(gitPath);
+
 SDL_DestroyTexture(texture);
 SDL_DestroyRenderer(rendere);
 SDL_DestroyWindow(splashscreen);
@@ -573,7 +601,7 @@ SDL_GetWindowSize(window, &width, &height);
                         .xpos=width-225,
                         .ypos=0,
                         .function=[](){
-                            StartGitPull();
+                            StartGitPull(gitPath);
                             pull_state=1;
                         }
                     }
