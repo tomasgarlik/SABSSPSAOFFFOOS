@@ -127,7 +127,7 @@ std::vector<std::string> GetCommitNotes(std::string gitPath, std::string branch=
     std::vector<std::string> notes;
 
 #ifdef _WIN32
-    std::string fetchCmd = "\"" + gitPath + "\" fetch --progress origin main";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --no-tags --quiet origin " + branch + " 2>&1";
     std::string logCmd   = "\"" + gitPath + "\" log HEAD..origin/" + branch + " --format=%s 2>&1";
 #else
     std::string fetchCmd = gitPath + " fetch --no-tags --quiet origin " + branch + " 2>&1";
@@ -172,7 +172,8 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     std::smatch match;
 
 #ifdef _WIN32
-    std::string fetchCmd = "\"" + gitPath + "\" fetch --progress origin main 2>&1";
+    std::string fetchCmd = "\"" + gitPath + "\" fetch --progress origin main";
+
     printf("fetch cmd: %s\n", fetchCmd.c_str());
 
     HANDLE hRead, hWrite;
