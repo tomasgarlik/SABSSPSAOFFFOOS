@@ -292,6 +292,7 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
 #endif
 
+
     printf("merge cmd: %s\n", mergeCmd.c_str());
     std::string mergeOutput = ExecCmdSimple(mergeCmd);
     printf("merge output: [%s]\n", mergeOutput.c_str());
