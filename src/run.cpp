@@ -287,7 +287,7 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     printf("starting merge...\n");
 
 #ifdef _WIN32
-    std::string mergeCmd = "\"" + gitPath + "\" git reset --hard origin/main 2>&1";
+    std::string mergeCmd = "\"" + gitPath + "\" reset --hard origin/main 2>&1";
 #else
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
 #endif
@@ -304,7 +304,15 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
         g_IsFinished = true;
         return;
     }
-
+    if (mergeOutput.find("fatal:") != std::string::npos || 
+        mergeOutput.find("error:") != std::string::npos ||
+        mergeOutput.find("CONFLICT") != std::string::npos ||
+        mergeOutput.find("is not a git command") != std::string::npos) {
+        printf("merge FAILED\n");
+        g_IsSuccess = false;
+        g_IsFinished = true;
+        return;
+    }
     printf("merge OK, all done!\n");
     g_Progress = 100;
     g_IsSuccess = true;
