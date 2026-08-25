@@ -714,6 +714,7 @@ int main(int argc, char* argv[]) {
     // });
     newfunc();
     update_seznam_panel_scrollables();
+    SDL_RaiseWindow(window);
     while (running){
         if (clickup){clickup=false;}
         find_front_and_back();
