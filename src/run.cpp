@@ -107,6 +107,7 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
             remoteHash.pop_back();
     }
 
+    
     // DEBUG - po opravě to smažeš
     printf("local hash:  [%s] len=%zu\n", localHash.c_str(), localHash.size());
     printf("remote hash: [%s] len=%zu\n", remoteHash.c_str(), remoteHash.size());
