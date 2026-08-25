@@ -306,7 +306,6 @@ std::string mergeOutput = "";
 
     printf("merge output: [%s]\n", mergeOutput.c_str());
 
-
     if (mergeOutput.find("fatal:") != std::string::npos || 
         mergeOutput.find("error:") != std::string::npos ||
         mergeOutput.find("CONFLICT") != std::string::npos) {
