@@ -854,7 +854,7 @@ for (int i = 0; i < STANDARTBORDER; i++) {
 
 
 
-            
+        
         } else if (weights_opened){
             put_project_weights_to_panel();
             updatePanel(renderer, &weights_panel);   
