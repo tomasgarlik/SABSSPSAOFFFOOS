@@ -313,6 +313,7 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
         g_IsFinished = true;
         return;
     }
+    
     printf("merge OK, all done!\n");
     g_Progress = 100;
     g_IsSuccess = true;
