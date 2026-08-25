@@ -286,15 +286,26 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     g_Progress = 85;
     printf("starting merge...\n");
 
+std::string mergeOutput = "";
+
 #ifdef _WIN32
-    std::string mergeCmd = "\"" + gitPath + "\" reset --hard origin/main 2>&1";
+    // 1. Stáhne všechny nové soubory KROMĚ složky git, fonts a spustitelného .exe
+    std::string checkoutCmd = "\"" + gitPath + "\" checkout origin/main -- . \":(exclude)git\" \":(exclude)run_win64.exe\" \":(exclude)fonts\" 2>&1";
+    printf("checkout cmd: %s\n", checkoutCmd.c_str());
+    ExecCmdSimple(checkoutCmd);
+
+    // 2. Posune lokální verzi (HEAD) na novou z GitHubu, aby se zapsal dokončený update
+    std::string syncCmd = "\"" + gitPath + "\" reset origin/main 2>&1";
+    printf("sync cmd: %s\n", syncCmd.c_str());
+    mergeOutput = ExecCmdSimple(syncCmd);
 #else
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
+    printf("merge cmd: %s\n", mergeCmd.c_str());
+    mergeOutput = ExecCmdSimple(mergeCmd);
 #endif
 
-    printf("merge cmd: %s\n", mergeCmd.c_str());
-    std::string mergeOutput = ExecCmdSimple(mergeCmd);
     printf("merge output: [%s]\n", mergeOutput.c_str());
+
 
     if (mergeOutput.find("fatal:") != std::string::npos || 
         mergeOutput.find("error:") != std::string::npos ||
@@ -313,7 +324,7 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
         g_IsFinished = true;
         return;
     }
-    
+
     printf("merge OK, all done!\n");
     g_Progress = 100;
     g_IsSuccess = true;
