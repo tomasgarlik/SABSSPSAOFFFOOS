@@ -68,7 +68,7 @@ void handle_events(){
                 break;
             case SDL_KEYDOWN:
                 modkey = SDL_GetModState();
-                if (modkey & KMOD_COMMAND) {
+                // if (modkey & KMOD_COMMAND) {
                     // switch (event.key.keysym.sym){
                     //     case SDLK_EQUALS:
                     //         scale+=0.2;
@@ -85,15 +85,15 @@ void handle_events(){
                         }
                         std::ofstream outFile("gui_type.txt"); // Otevře soubor pro zápis
     
-if (outFile.is_open()) {
-    outFile << gui_type; // Zapíše int do souboru
-    outFile.close();  // Soubor je důležité zavřít
-} else {
-    std::cerr << "Chyba: Nepodarilo se otevrit soubor pro zapis!\n";
-}
+                    if (outFile.is_open()) {
+                        outFile << gui_type; // Zapíše int do souboru
+                        outFile.close();  // Soubor je důležité zavřít
+                    } else {
+                        std::cerr << "Chyba: Nepodarilo se otevrit soubor pro zapis!\n";
+                    }
 
                     }
-                } else {
+                // } else {
                     switch (event.key.keysym.sym){
                         case SDLK_LEFT:
                             specialkey='l';
@@ -105,7 +105,7 @@ if (outFile.is_open()) {
                             specialkey='b';
                             break;
                         }
-                }
+                // }
                 break;
             case SDL_WINDOWEVENT_RESIZED:
                 SDL_GetWindowSize(window, &width, &height);
