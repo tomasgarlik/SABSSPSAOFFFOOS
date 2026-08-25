@@ -103,7 +103,13 @@ bool CheckForUpdates(std::string gitPath = "git", std::string branch = "main") {
         if (spacePos != std::string::npos) {
             remoteHash = remoteOutput.substr(0, spacePos);
         }
+        while (!remoteHash.empty() && (remoteHash.back() == '\n' || remoteHash.back() == '\r' || remoteHash.back() == ' '))
+            remoteHash.pop_back();
     }
+
+    // DEBUG - po opravě to smažeš
+    printf("local hash:  [%s] len=%zu\n", localHash.c_str(), localHash.size());
+    printf("remote hash: [%s] len=%zu\n", remoteHash.c_str(), remoteHash.size());
 
     // Pokud se lokální a vzdálený hash neshodují, je k dispozici aktualizace!
     if (!remoteHash.empty() && localHash != remoteHash) {
