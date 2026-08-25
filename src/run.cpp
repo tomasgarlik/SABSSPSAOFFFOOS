@@ -685,9 +685,16 @@ SDL_GetWindowSize(window, &width, &height);
                         .origin_left=false
                     }
                 });
-                bool success;
-                if (IsGitPullFinished(success) && overall_progress>=100){
-                    pull_state=2;
+                bool success=false;
+                if (IsGitPullFinished(success)) {
+                    if (success) {
+                        if (overall_progress >= 100) {
+                            pull_state = 2; // Úspěšně dokončeno
+                        }
+                    } else {
+                        gitError = "Chyba při stahování nebo slučování aktualizace.";
+                        pull_state = 3; // Selhání -> zobrazí chybovou obrazovku
+                    }
                 }
             } else if (pull_state==2){
                 p.top_elements.push_back({
