@@ -287,7 +287,7 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     printf("starting merge...\n");
 
 #ifdef _WIN32
-    std::string mergeCmd = "\"" + gitPath + "\" merge --ff-only origin/main 2>&1";
+    std::string mergeCmd = "\"" + gitPath + "\" git reset --hard origin/main 2>&1";
 #else
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
 #endif
