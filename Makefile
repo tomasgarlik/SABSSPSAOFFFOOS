@@ -15,20 +15,21 @@ SRC = src/main.cpp src/tinyfiledialogs.cpp src/pdfgen.cpp
 ifeq ($(OS),Windows_NT)
     # --- WINDOWS NASTAVENÍ ---
     CXX = C:/Users/Tomas/Documents/clang/bin/clang++.exe
+    WINDRES = windres
     SDL_PATH = SDL2_windows
     OUT = program_win64.exe
     CXXFLAGS = -std=gnu++20 -I$(SDL_PATH)/include -I$(SDL_PATH)/include/SDL2 -Ofast -march=native -DNDEBUG --target=x86_64-w64-mingw32
     LDFLAGS = -static -mwindows -L$(SDL_PATH)/lib -lglew32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lopengl32 -lcomdlg32 -lole32 -luuid -lgdi32 -limm32 -lwinmm -lversion -lcfgmgr32 -lsetupapi -lrpcrt4 -loleaut32 -lm
     RM = del /Q /F
-    
-    # Tady definujeme příkaz pro kompilaci (na Windows dvoukrokově)
+
     COMPILE_AND_LINK = \
+        $(WINDRES) resource.rc -O coff -o resource.o && \
         $(CXX) $(CXXFLAGS) -c src/main.cpp -o main.o && \
         $(CXX) $(CXXFLAGS) -c src/tinyfiledialogs.cpp -o tinyfiledialogs.o && \
         $(CXX) $(CXXFLAGS) -c src/pdfgen.cpp -o pdfgen.o && \
-        g++ main.o tinyfiledialogs.o pdfgen.o -o $(OUT) $(LDFLAGS)
-    
-    CLEAN_FILES = $(OUT) *.o
+        g++ main.o tinyfiledialogs.o pdfgen.o resource.o -o $(OUT) $(LDFLAGS)
+
+    CLEAN_FILES = $(OUT) *.o resource.o
 else
     # --- MAC NASTAVENÍ ---
     CXX = clang++
