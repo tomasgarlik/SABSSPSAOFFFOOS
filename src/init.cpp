@@ -27,11 +27,11 @@ std::ifstream inFile("gui_type.txt"); // Otevře soubor pro čtení
     }
 SDL_Rect rect;
 TTF_Init();
-if (gui_type!=3){
+// if (gui_type!=3){
     lfont = TTF_OpenFont("fonts/font3.ttf", lfont_size);
-} else {
-    lfont = TTF_OpenFont("fonts/font1.ttf", lfont_size);
-}
+// } else {
+    // lfont = TTF_OpenFont("fonts/font1.ttf", lfont_size);
+// }
 hfont = TTF_OpenFont("fonts/font3.ttf", 300);
 font=lfont;
 fontsize=lfont_size;

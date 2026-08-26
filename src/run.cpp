@@ -591,6 +591,7 @@ SDL_GetWindowSize(window, &width, &height);
         std::string endstring;
         #define ENDSTRING_PERIOD 500
         printf("done\nstarting main loop\n");
+        int scroll=0;
         while (running){
             if (clickup){clickup=false;}
             SDL_GetRendererOutputSize(renderer, &width, &height);
@@ -600,7 +601,9 @@ SDL_GetWindowSize(window, &width, &height);
             SDL_Rect rect = { 0, 0, width, height };
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             SDL_RenderFillRect(renderer, &rect);
+            
             panel p={};
+            p.scrolled=scroll;
             if ((SDL_GetTicks()/ENDSTRING_PERIOD)%3==0){
                 endstring=".";
             } else if ((SDL_GetTicks()/ENDSTRING_PERIOD)%3==1){
@@ -769,6 +772,7 @@ SDL_GetWindowSize(window, &width, &height);
             }
 
             updatePanel(renderer, &p);
+            scroll=p.scrolled;
             if (pull_state==1){
                 SDL_Rect rect = { 0, height-STANDARTPICEHEIGHT, width, STANDARTPICEHEIGHT };
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
