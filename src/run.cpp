@@ -290,14 +290,19 @@ std::string mergeOutput = "";
 
 #ifdef _WIN32
     // 1. Stáhne všechny nové soubory KROMĚ složky git, fonts a spustitelného .exe
+// 1. Uložíme a vytiskneme výstup z checkoutu (včetně případných chyb)
     std::string checkoutCmd = "\"" + gitPath + "\" checkout origin/main -- . \":(exclude)git\" \":(exclude)run_win64.exe\" \":(exclude)fonts\" 2>&1";
     printf("checkout cmd: %s\n", checkoutCmd.c_str());
-    ExecCmdSimple(checkoutCmd);
+    std::string checkoutOutput = ExecCmdSimple(checkoutCmd);
+    printf("checkout output: [%s]\n", checkoutOutput.c_str());
 
-    // 2. Posune lokální verzi (HEAD) na novou z GitHubu, aby se zapsal dokončený update
-    std::string syncCmd = "\"" + gitPath + "\" reset origin/main 2>&1";
+    // 2. Synchronizace HEAD na origin/main
+    std::string syncCmd = "\"" + gitPath + "\" reset --mixed origin/main 2>&1";
     printf("sync cmd: %s\n", syncCmd.c_str());
-    mergeOutput = ExecCmdSimple(syncCmd);
+    std::string syncOutput = ExecCmdSimple(syncCmd);
+
+    // Spojíme výstupy z obou příkazů pro společnou kontrolu chyb
+    mergeOutput = checkoutOutput + "\n" + syncOutput;
 #else
     std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
     printf("merge cmd: %s\n", mergeCmd.c_str());

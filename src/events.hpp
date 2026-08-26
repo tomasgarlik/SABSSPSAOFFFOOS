@@ -79,6 +79,7 @@ void handle_events(){
                     //         if (scale<=0.0){scale=0.2;}
                     //         break;
                     //     }
+                    
                     if (event.key.keysym.sym == SDLK_g) {
                         gui_type++;
                         if (gui_type > 3) {
