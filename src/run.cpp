@@ -286,44 +286,35 @@ static void InternalGitPullWorker(std::string gitPath = "git") {
     g_Progress = 85;
     printf("starting merge...\n");
 
-std::string mergeOutput = "";
+    std::string mergeOutput = "";
 
 #ifdef _WIN32
-    // 1. Stáhne všechny nové soubory KROMĚ složky git, fonts a spustitelného .exe
-// 1. Uložíme a vytiskneme výstup z checkoutu (včetně případných chyb)
-    std::string checkoutCmd = "\"" + gitPath + "\" checkout origin/main -- . \":(exclude)git\" \":(exclude)run_win64.exe\" \":(exclude)fonts\" 2>&1";
+    // Vnější uvozovky \"...\" brání cmd.exe v poškození vnitřních uvozovek
+    std::string checkoutCmd = "\"\"" + gitPath + "\" checkout origin/main -- . \":(exclude)git\" \":(exclude)run_win64.exe\" \":(exclude)fonts\" 2>&1\"";
     printf("checkout cmd: %s\n", checkoutCmd.c_str());
     std::string checkoutOutput = ExecCmdSimple(checkoutCmd);
     printf("checkout output: [%s]\n", checkoutOutput.c_str());
 
-    // 2. Synchronizace HEAD na origin/main
-    std::string syncCmd = "\"" + gitPath + "\" reset --mixed origin/main 2>&1";
+    std::string syncCmd = "\"\"" + gitPath + "\" reset --mixed origin/main 2>&1\"";
     printf("sync cmd: %s\n", syncCmd.c_str());
     std::string syncOutput = ExecCmdSimple(syncCmd);
 
-    // Spojíme výstupy z obou příkazů pro společnou kontrolu chyb
     mergeOutput = checkoutOutput + "\n" + syncOutput;
 #else
-    std::string mergeCmd = gitPath + " merge --ff-only origin/main 2>&1";
+    std::string mergeCmd = gitPath + " reset --hard origin/main 2>&1";
     printf("merge cmd: %s\n", mergeCmd.c_str());
     mergeOutput = ExecCmdSimple(mergeCmd);
 #endif
 
-    printf("merge output: [%s]\n", mergeOutput.c_str());
+    printf("merge full output:\n%s\n", mergeOutput.c_str());
 
+    // Doplněna detekce chyb systému Windows i Gitu
     if (mergeOutput.find("fatal:") != std::string::npos || 
         mergeOutput.find("error:") != std::string::npos ||
-        mergeOutput.find("CONFLICT") != std::string::npos) {
-        printf("merge FAILED\n");
-        g_IsSuccess = false;
-        g_IsFinished = true;
-        return;
-    }
-    if (mergeOutput.find("fatal:") != std::string::npos || 
-        mergeOutput.find("error:") != std::string::npos ||
-        mergeOutput.find("CONFLICT") != std::string::npos ||
-        mergeOutput.find("is not a git command") != std::string::npos) {
-        printf("merge FAILED\n");
+        mergeOutput.find("cannot find the path") != std::string::npos ||
+        mergeOutput.find("Permission denied") != std::string::npos) {
+        
+        printf("merge FAILED!\n");
         g_IsSuccess = false;
         g_IsFinished = true;
         return;
