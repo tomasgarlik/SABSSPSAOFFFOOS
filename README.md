@@ -22,7 +22,7 @@ Program pro učitele, který automaticky navrhuje zasedací pořádek žáků na
 
 ### Krok 1: Stažení
 
-Vpravo na postranním panelu najděte sekci **„Releases"** a klikněte na **„Tags"**. Otevře se stránka s verzemi, klikněte na nejnovější a pak z assets stáhněte instalátor (`.exe` soubor).
+Vpravo na postranním panelu najděte sekci **„Releases"** a klikněte na **„Tags"**. Otevře se stránka s verzemi, klikněte na nejnovější, z assets stáhněte instalátor (`.zip` soubor) a soubor pak rozzipujte.
 
 V některých prohlížečích je zapotřebí dodatečně potvrdit, že si chcete soubor ponechat. Je to kvůli antivirové ochraně některých prohlížečů.
 
