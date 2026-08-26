@@ -20,7 +20,7 @@ AppVersion={#MyAppVersion}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\SABSSPSAOFFFOOS
+DefaultDirName={userappdata}\..\Local\Programs\SABSSPSAOFFFOOS
 UninstallDisplayIcon={app}\{#MyAppExeName}
 ; "ArchitecturesAllowed=x64compatible" specifies that Setup cannot run
 ; on anything but x64 and Windows 11 on Arm.
@@ -36,8 +36,8 @@ LicenseFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\licence_agreenement.txt
 InfoBeforeFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\info_intro.txt
 InfoAfterFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\info_end.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
-;PrivilegesRequired=lowest
-PrivilegesRequiredOverridesAllowed=dialog
+PrivilegesRequired=lowest
+;PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Tomas\Desktop\
 OutputBaseFilename=instalator
 SetupIconFile=C:\Users\Tomas\Desktop\SABSSPSAOFFFOOS\icons\icon.ico
