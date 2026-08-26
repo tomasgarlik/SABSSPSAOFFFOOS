@@ -1,5 +1,3 @@
-gdfsgd gdfs gdf s
-
 Program pro učitele, který automaticky navrhuje zasedací pořádek žáků na základě zadaných kritérií pomocí optimalizačního algoritmu.
 
 ---
