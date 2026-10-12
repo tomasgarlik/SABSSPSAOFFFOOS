@@ -61,7 +61,7 @@ Po spuštění programu se zobrazí pracovní plocha, na které se vytváří a 
 
 ## Přidávání žáků
 
-Do nabídky správy žáků se dostanete přes menu **„Seznam žáků"**. Zde můžete přidávat nové žáky nebo upravovat jejich parametry v okně **„Upravit žáka"** (otevře se tlačítkem **„..."** u žáka v seznamu).
+Do nabídky správy žáků se dostanete přes menu **„Seznam žáků"**. Zde můžete importovat seznam žáků z tabulky formátu CSV (podporuje import tabulky se seznamem jmen i dalšími parametry, včetně souborů exportovaných z Bakalářů) nebo přidávat nové žáky či upravovat jejich parametry v okně **„Upravit žáka"** (otevře se tlačítkem **„..."** u žáka v seznamu).
 
 **Přehled parametrů žáka:**
 
